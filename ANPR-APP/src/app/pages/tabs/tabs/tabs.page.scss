@@ -1,0 +1,280 @@
+.custom-tab-bar {
+  background: linear-gradient(135deg,
+    rgba(15, 15, 18, 0.85) 0%,
+    rgba(20, 20, 26, 0.9) 50%,
+    rgba(16, 16, 20, 0.95) 100%);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 -8px 32px rgba(0, 0, 0, 0.6),
+    0 -2px 16px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(215, 255, 72, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+  padding: 8px 20px;
+  margin: 0 auto 16px auto;
+  width: 85%;
+  max-width: 320px;
+  border-radius: 28px;
+  height: 64px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow: visible;
+  z-index: 1000;
+
+  /* Efecto glassmorphism mejorado */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+      rgba(215, 255, 72, 0.08) 0%,
+      rgba(255, 255, 255, 0.12) 30%,
+      rgba(215, 255, 72, 0.04) 100%);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  ion-tab-button {
+    flex: 1;
+    background: transparent;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    padding: 8px;
+
+    /* Efecto hover mejorado */
+    &:hover:not(.active) .tab-icon-wrapper {
+      background: rgba(215, 255, 72, 0.15);
+      transform: scale(1.08);
+
+      &::before {
+        transform: translate(-50%, -50%) scale(1);
+        background: radial-gradient(circle, rgba(215, 255, 72, 0.2) 0%, transparent 60%);
+      }
+
+      ion-icon {
+        color: rgba(215, 255, 72, 0.8);
+      }
+    }
+
+    .tab-icon-wrapper {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      z-index: 2;
+
+      /* Resplandor sutil para iconos inactivos */
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(215, 255, 72, 0.1) 0%, transparent 70%);
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.3s ease;
+        pointer-events: none;
+      }
+
+      ion-icon {
+        font-size: 24px;
+        color: rgba(160, 174, 192, 0.7);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        z-index: 3;
+      }
+    }
+
+    /* Estado activo con combinación premium */
+    &.active .tab-icon-wrapper.floating {
+      background: linear-gradient(145deg,
+        #d7ff48 0%,
+        #e8ff7a 35%,
+        #f4ff9a 70%,
+        #d7ff48 100%);
+      border: 2.5px solid rgba(215, 255, 72, 0.9);
+      box-shadow:
+        0 12px 32px rgba(215, 255, 72, 0.35),
+        0 6px 16px rgba(215, 255, 72, 0.25),
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(215, 255, 72, 0.8);
+      transform: scale(1.2) translateY(-3px);
+      z-index: 10;
+
+      /* Animación de pulso mejorada */
+      animation: enhancedPulse 3s ease-in-out infinite;
+
+      &::before {
+        transform: translate(-50%, -50%) scale(1.4);
+        background: radial-gradient(circle,
+          rgba(215, 255, 72, 0.4) 0%,
+          rgba(215, 255, 72, 0.1) 50%,
+          transparent 80%);
+      }
+    }
+
+    &.active .tab-icon-wrapper.floating ion-icon {
+      color: #0a0f0a;
+      font-size: 22px;
+      font-weight: 700;
+      text-shadow: 0 1px 2px rgba(215, 255, 72, 0.3);
+      transform: scale(1.1);
+    }
+
+    /* Indicador mejorado para tab activo */
+    &.active::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #d7ff48, #e8ff7a);
+      box-shadow:
+        0 0 12px rgba(215, 255, 72, 0.8),
+        0 0 6px rgba(215, 255, 72, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+      animation: glowDot 0.4s ease;
+    }
+  }
+}
+
+/* Animaciones premium */
+@keyframes enhancedPulse {
+  0%, 100% {
+    box-shadow:
+      0 12px 32px rgba(215, 255, 72, 0.35),
+      0 6px 16px rgba(215, 255, 72, 0.25),
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      inset 0 2px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(215, 255, 72, 0.8);
+  }
+  50% {
+    box-shadow:
+      0 12px 32px rgba(215, 255, 72, 0.5),
+      0 6px 16px rgba(215, 255, 72, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      inset 0 2px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(215, 255, 72, 0.9);
+  }
+}
+
+@keyframes glowDot {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+    box-shadow:
+      0 0 4px rgba(215, 255, 72, 0.4),
+      0 0 2px rgba(215, 255, 72, 0.3);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    box-shadow:
+      0 0 12px rgba(215, 255, 72, 0.8),
+      0 0 6px rgba(215, 255, 72, 0.6),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: scale(0.8) translateY(8px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.2) translateY(-3px);
+    opacity: 1;
+  }
+}
+
+/* Variación para diferentes tamaños de pantalla */
+@media (max-width: 320px) {
+  .custom-tab-bar {
+    width: 90%;
+    height: 60px;
+    padding: 6px 16px;
+
+    ion-tab-button .tab-icon-wrapper {
+      width: 40px;
+      height: 40px;
+
+      ion-icon {
+        font-size: 22px;
+      }
+    }
+
+    ion-tab-button.active .tab-icon-wrapper.floating {
+      transform: scale(1.1) translateY(-1px);
+
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .custom-tab-bar {
+    max-width: 400px;
+    height: 68px;
+
+    ion-tab-button .tab-icon-wrapper {
+      width: 48px;
+      height: 48px;
+
+      ion-icon {
+        font-size: 26px;
+      }
+    }
+
+    ion-tab-button.active .tab-icon-wrapper.floating {
+      transform: scale(1.2) translateY(-3px);
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+/* Mejora para el safe area en iOS */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .custom-tab-bar {
+    margin-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}

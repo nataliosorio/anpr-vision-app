@@ -1,0 +1,291 @@
+/* Variables para el tema oscuro y aguamarina */
+:root {
+  --bubble-dark: #1a1a1a;
+  --bubble-dark-light: #2d2d2d;
+  --bubble-aqua: #4ecdc4;
+  --bubble-aqua-dark: #44a08d;
+  --bubble-aqua-darker: #093637;
+  --text-white: #ffffff;
+  --text-light: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.6);
+}
+
+/* Contenedor principal del menú */
+.bubble-menu {
+  --width: 300px;
+}
+
+.bubble-menu .menu-content {
+  // --background: var(--bubble-dark) !important;
+  --color: var(--text-white);
+  --background: var(--anpr-bg);
+
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Fondo con forma orgánica/burbuja - SOLO ARRIBA */
+.bubble-background{
+  position:absolute; inset:0 auto auto 0;
+  width:100%; height:310px; z-index:1;
+  pointer-events:none;
+}
+
+.bubble-svg{ position:absolute; inset:0; width:100%; height:100%; }
+/* Wrapper del contenido sobre la burbuja */
+.menu-wrapper{ position:relative; z-index:2; height:100%; display:flex; flex-direction:column; }
+/* Header con perfil de usuario */
+.profile-header{
+  padding: 48px 24px 18px;
+  background:transparent;
+}
+
+.curve-spacer{
+  height: 22px;        /* juega entre 16–26px según tu gusto */
+  margin: 0 12px;      /* mismo padding lateral del listado */
+}
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.close-btn ion-icon {
+  color: var(--text-white);
+  font-size: 20px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.avatar-wrapper {
+  position: relative;
+}
+
+.user-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  background: #4a90e2;
+}
+
+.user-details {
+  flex: 1;
+
+  p{
+    font-size: 15px;
+  }
+}
+
+.user-name {
+  font-size: 25px;
+  font-weight: 800;
+  margin: 0 0 5px 0;
+  color: var(--text-white);
+}
+
+.user-role {
+  font-size: 14px;
+  margin: 0;
+  color: var(--text-light);
+}
+
+/* Sección de navegación - FONDO NORMAL */
+.navigation-section{
+  flex:1;
+  padding: 0 12px 16px;
+  background: var(--bubble-dark);
+}
+.bubble-nav-list{ background:transparent; padding:0; }
+
+
+/* Items de navegación */
+.nav-item-wrapper{
+  position:relative;
+  margin: 10px 0;
+  border-radius: 24px;
+  transition: all .35s cubic-bezier(.25,.8,.25,1);
+  cursor:pointer; overflow:hidden;
+  backdrop-filter: saturate(120%);
+}
+// .bubble-nav-list .nav-item-wrapper:first-child{
+//   margin-top: -6px;               /* lo acerca a la panza */
+//   box-shadow: 0 10px 18px rgba(0,0,0,.18);
+// }
+/* Hover/activo */
+.nav-item-wrapper:hover{ transform: translateX(10px); background: rgba(255,255,255,.10); }
+.nav-item-wrapper.active{ background: rgba(255,255,255,.15); transform: translateX(14px); }
+
+
+.nav-item-content {
+  display: flex;
+  align-items: center;
+  padding: 18px 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.icon-container {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.nav-icon {
+  font-size: 24px;
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.nav-item-wrapper:hover .nav-icon,
+.nav-item-wrapper.active .nav-icon {
+  color: var(--text-white);
+  transform: scale(1.1);
+}
+
+.nav-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.nav-item-wrapper:hover .nav-text,
+.nav-item-wrapper.active .nav-text {
+  color: var(--text-white);
+  font-weight: 600;
+}
+
+/* Indicador de selección */
+.selection-indicator{
+  position:absolute; left:0; top:50%; transform:translateY(-50%);
+  width:4px; height:60%; background:#00bcd4; border-radius:2px 0 0 2px; animation:slideIn .25s ease;
+}
+
+/* Efectos adicionales para la burbuja - REDUCIDOS */
+.bubble-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(78, 205, 196, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(68, 160, 141, 0.2) 0%, transparent 50%);
+  z-index: 1;
+}
+
+/* Animaciones */
+@keyframes slideIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 4px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-item-wrapper {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.nav-item-wrapper:nth-child(1) { animation-delay: 0.1s; }
+.nav-item-wrapper:nth-child(2) { animation-delay: 0.2s; }
+.nav-item-wrapper:nth-child(3) { animation-delay: 0.3s; }
+.nav-item-wrapper:nth-child(4) { animation-delay: 0.4s; }
+.nav-item-wrapper:nth-child(5) { animation-delay: 0.5s; }
+.nav-item-wrapper:nth-child(6) { animation-delay: 0.6s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bubble-menu {
+    --width: 280px;
+  }
+
+  .bubble-background {
+    height: 310px; /* Más pequeña en móvil */
+  }
+
+  .profile-header {
+    padding: 40px 20px 30px;
+  }
+
+  .user-avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .user-name {
+    font-size: 18px;
+  }
+
+  .nav-item-content {
+    padding: 15px 20px;
+    margin-top: 6px;
+  }
+}
+
+/* Estilos para el tema oscuro */
+@media (prefers-color-scheme: dark) {
+  .bubble-menu .menu-content {
+    --background: var(--bubble-dark);
+  }
+}
+
+/* Override estilos de Ionic */
+ion-menu.bubble-menu ion-content {
+  --background: var(--bubble-dark);
+}
+
+ion-menu.bubble-menu ion-list {
+  background: transparent;
+}
+
+ion-menu.bubble-menu ion-menu-toggle {
+  display: block;
+}

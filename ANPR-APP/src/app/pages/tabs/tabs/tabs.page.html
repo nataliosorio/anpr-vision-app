@@ -1,0 +1,37 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom" class="custom-tab-bar">
+    <ion-tab-button
+      tab="home"
+      href="/tabs/home"
+      (click)="goTo('home')"
+      [class.active]="selectedTab === 'home'">
+      <div class="tab-icon-wrapper" [class.floating]="selectedTab === 'home'">
+        <ion-icon name="car"></ion-icon>
+      </div>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="ordenar"
+      href="/tabs/ordenar"
+      (click)="goTo('ordenar')"
+      [class.active]="selectedTab === 'ordenar'">
+      <div class="tab-icon-wrapper" [class.floating]="selectedTab === 'ordenar'">
+        <!-- <ion-icon name="car"></ion-icon> -->
+        <ion-icon name="business-outline"></ion-icon>
+<span style="font-weight:bold; font-size:18px;">P</span>
+
+
+      </div>
+    </ion-tab-button>
+
+    <ion-tab-button
+      tab="user"
+      href="/tabs/user"
+      (click)="goTo('user')"
+      [class.active]="selectedTab === 'user'">
+      <div class="tab-icon-wrapper" [class.floating]="selectedTab === 'user'">
+        <ion-icon name="person"></ion-icon>
+      </div>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

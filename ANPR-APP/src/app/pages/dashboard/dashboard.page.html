@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-button expand="full" color="tertiary" (click)="mostrarNotificacion()">
+  Probar Notificación
+</ion-button>
+
+  
+
+ <ion-card>
+  <ion-card-header>
+    <ion-card-title>Gráfico de Ventas</ion-card-title>
+  </ion-card-header>
+  <ion-card-content style="height: 500px;">
+    <app-bar-chart></app-bar-chart>
+  </ion-card-content>
+</ion-card>
+
+
+</ion-content>

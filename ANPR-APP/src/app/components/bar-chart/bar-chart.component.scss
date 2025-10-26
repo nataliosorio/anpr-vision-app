@@ -1,0 +1,42 @@
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.chart-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  ion-icon {
+    font-size: 32px;
+  }
+
+  div {
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0;
+      color: var(--ion-color-medium);
+      font-size: 14px;
+    }
+  }
+}
+
+ion-card {
+  margin: 16px 0;
+}

@@ -1,0 +1,130 @@
+/* HEADER limpio y sin borde */
+.home-header ion-toolbar{
+  --background: var(--anpr-bg);
+  --color: var(--anpr-text);
+  --border-color: transparent;
+  box-shadow: none;
+}
+
+/* Lienzo */
+.home-content{
+  --background: var(--anpr-bg);
+  --padding-top: 12px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --padding-bottom: 20px;
+  color: var(--anpr-text);
+}
+
+/* Centrado y límite de ancho (opcional, se ve más “app”) */
+.page{
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* TOP BAR */
+.topbar{
+  display:flex; align-items:flex-start; justify-content:space-between;
+  margin-top: 6px; margin-bottom: 8px;
+}
+.big{ font-size: 32px; line-height: 1; margin: 4px 0 0; font-weight: 800; }
+.muted{ color: var(--anpr-muted); margin: 0; }
+.right{ display:flex; align-items:center; gap: 10px; }
+
+.pill{
+  display:inline-flex; align-items:center; gap:6px;
+  padding: 8px 12px; border-radius: 14px; border: 0;
+  background: color-mix(in srgb, var(--anpr-card) 75%, black);
+  color: var(--anpr-text); font-weight: 700;
+}
+.avatar{
+  width:34px; height:34px; border-radius:10px; overflow:hidden;
+  border:2px solid color-mix(in srgb, var(--anpr-card) 80%, black);
+  display:grid; place-items:center; background: var(--anpr-card);
+  color: var(--anpr-text); font-weight: 800;
+}
+.avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* CARD PRINCIPAL */
+.hero-card{
+  position:relative;
+  margin-top: 10px; padding: 18px;
+  background: linear-gradient(160deg, var(--anpr-primary), var(--anpr-accent));
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(0,0,0,.35);
+  display:flex; align-items:center; justify-content:space-between; overflow:hidden;
+}
+.hero-card .copy h2{ margin:0; font-weight:900; letter-spacing:.2px; }
+.hero-card .sub{ margin:8px 0 0; color:#e9fffd; opacity:.95; }
+
+.ring{ position:relative; width:88px; height:88px; }
+.track,.progress{ fill:none; stroke-width:10; }
+.track{ stroke: rgba(255,255,255,.25); }
+.progress{ stroke:#fff; stroke-linecap:round; transition: stroke-dasharray .35s ease; }
+.percent{ position:absolute; inset:0; display:grid; place-items:center; font-weight:800; }
+
+.spark{ position:absolute; width:6px; height:6px; border-radius:50%; background:#fff; opacity:.9; }
+.s1{ right:26%; top:18%; } .s2{ right:12%; top:48%; width:4px; height:4px; } .s3{ right:20%; bottom:14%; }
+
+/* GRID */
+.cards{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin-top: 14px; padding-bottom: 8px;
+}
+.mini-card{
+  background: var(--anpr-card);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 12px 24px rgba(0,0,0,.35);
+}
+.head{ display:flex; align-items:center; gap:8px; font-weight:700; color: var(--anpr-text); }
+.icon{
+  width:26px; height:26px; border-radius:9px; display:grid; place-items:center; color:#0b1111;
+}
+.red{ background: #ff6b6b; }   /* acentos fijos para íconos */
+.blue{ background: #4dabf7; }
+.purple{ background: #b15cff; }
+.yellow{ background: #f3b64c; }
+
+/* sparkline */
+.chart{ margin-top: 6px; }
+.sparkline{ fill:none; stroke:#ff7d7d; stroke-width:2; opacity:.9; }
+
+/* Water pie */
+.pie{ position:relative; display:flex; align-items:center; justify-content:center; margin-top:6px; }
+.pie-text{ position:absolute; font-weight:900; font-size:18px; transform:translateY(-4px); }
+.pie small{ position:absolute; bottom:2px; font-size:10px; color: var(--anpr-muted); }
+.pie-track,.pie-fill{ fill:none; stroke-width:8; }
+.pie-track{ stroke: color-mix(in srgb, var(--anpr-card) 70%, black); }
+.pie-fill{ stroke: #6cb4ff; stroke-linecap:round; transition:stroke-dasharray .35s ease; }
+.wave{ fill: color-mix(in srgb, var(--anpr-accent) 40%, black); opacity:.75; }
+
+/* Food semicircle */
+.semi-track{ fill:none; stroke: color-mix(in srgb, var(--anpr-card) 70%, black); stroke-width:10; stroke-linecap:round; }
+.semi-fill{ fill:none; stroke:#b15cff; stroke-width:10; stroke-linecap:round; }
+
+/* Exercise dots */
+.dots{
+  position:relative; height:60px; margin:6px 0 4px;
+  background: radial-gradient(80% 60% at 20% 80%, color-mix(in srgb, var(--anpr-card) 90%, black), var(--anpr-card));
+  border-radius:12px;
+}
+.dot{ position:absolute; width:6px; height:6px; border-radius:50%; background:#ffc857; box-shadow:0 0 10px rgba(255,200,87,.6); }
+
+/* Footer de cada mini card */
+.footer{ display:flex; align-items:baseline; gap:6px; margin-top:6px; }
+.footer b{ font-size:18px; }
+.footer span{ color: var(--anpr-muted); }
+
+/* Indicador inferior */
+.home-indicator{
+  height:10px; width:110px; margin: 14px auto 0;
+  border-radius:10px; background: color-mix(in srgb, var(--anpr-card) 70%, black);
+  opacity:.7;
+}
+
+/* Responsive */
+@media (max-width: 360px){
+  .big{ font-size:28px; }
+  .cards{ gap:10px; }
+}

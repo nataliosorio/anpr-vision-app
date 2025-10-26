@@ -1,0 +1,112 @@
+<ion-header class="header ion-no-border" [translucent]="true">
+  <ion-toolbar class="toolbar">
+    <div class="greeting">
+      <img class="avatar" src="assets/images/avatar.png" alt="avatar" />
+      <div class="hello">
+        <div class="tiny">Hola!</div>
+        <div class="name">{{ username }} 👋</div>
+      </div>
+    </div>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="loadVehiclesFromApi()">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="dark">
+  <div class="content-padder">
+
+    <!-- Detalle del vehículo seleccionado -->
+    <div class="vehicle-card">
+      <div class="vehicle-title">
+        <div class="tiny muted">Mis Vehículos</div>
+        <ion-button fill="clear" size="small" (click)="loadVehiclesFromApi()">
+          <ion-icon name="refresh-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="vehicle-name">
+        <span *ngIf="selectedVehicle" class="status-badge"
+              [class.in]="selectedVehicle.isInside"
+              [class.out]="!selectedVehicle.isInside">
+          <ion-icon [name]="selectedVehicle.isInside ? 'enter-outline' : 'exit-outline'"></ion-icon>
+          {{ selectedVehicle.isInside ? 'En el estacionamiento' : 'Fuera del estacionamiento' }}
+        </span>
+      </div>
+
+      <div class="vehicle-image">
+        <ion-img [src]="getVehicleImg(selectedVehicle)" alt="vehículo"></ion-img>
+      </div>
+
+      <div class="stats-row" *ngIf="selectedVehicle">
+        <div class="stat-chip">
+          <div class="label">Color</div>
+          <div class="value">{{ selectedVehicle?.color || '—' }}</div>
+        </div>
+        <div class="stat-chip">
+          <div class="label">Tipo</div>
+          <div class="value">{{ selectedVehicle?.typeVehicle || '—' }}</div>
+        </div>
+        <div class="stat-chip">
+          <div class="label">Hora de entrada</div>
+          <div class="value">{{ selectedVehicle?.activeEntryDate | formatDate }}</div>
+        </div>
+      </div>
+
+      <div class="battery-row">
+        <div class="battery-pill">
+          <ion-icon name="car-outline"></ion-icon>
+          Placa: <span>{{ selectedVehicle?.plate || '—' }}</span>
+        </div>
+
+        <ion-button class="round-btn" size="small">
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Filtros y carrusel -->
+    <div class="nearby">
+      <div class="nearby-top">
+        <div class="tiny muted">Mis Vehículos</div>
+      </div>
+
+      <div class="filters">
+        <button class="filter" [class.active]="selectedFilter==='all'" (click)="onChangeFilter('all')">
+          All
+        </button>
+        <button class="filter" [class.active]="selectedFilter==='car'" (click)="onChangeFilter('car')">
+          <ion-icon name="car-outline"></ion-icon> Cars
+        </button>
+        <button class="filter" [class.active]="selectedFilter==='moto'" (click)="onChangeFilter('moto')">
+          <ion-icon name="bicycle-outline"></ion-icon> Motorcycle
+        </button>
+        <button class="filter" [class.active]="selectedFilter==='bike'" (click)="onChangeFilter('bike')">
+          <ion-icon name="trail-sign-outline"></ion-icon> Bicycle
+        </button>
+      </div>
+
+      <div class="cards">
+        <div
+          class="veh-card"
+          *ngFor="let v of filteredVehicles"
+          (click)="onPick(v)"
+          [class.selected]="selectedVehicle?.id === v.id"
+        >
+          <div class="veh-img">
+            <ion-img [src]="getVehicleImg(v)" [alt]="v.plate"></ion-img>
+          </div>
+          <div class="veh-name">{{ v.plate }}</div>
+        </div>
+
+        <div class="veh-card empty" *ngIf="!loadingVehicles && filteredVehicles.length === 0">
+          <div class="veh-name">Sin vehículos</div>
+          <div class="veh-price tiny muted">No hay resultados para este filtro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

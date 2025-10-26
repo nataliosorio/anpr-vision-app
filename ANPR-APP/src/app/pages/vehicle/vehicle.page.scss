@@ -1,0 +1,653 @@
+:host {
+  --accent: #d7ff48;
+  --accent-soft: #e8ff7a;
+  --card: #1a1a20;
+  --card-secondary: #16161c;
+  --bg: #0e0e11;
+  --muted: #9ca3af;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border: rgba(255, 255, 255, 0.08);
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+}
+
+.dark {
+  --ion-background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+.header .toolbar {
+  --background: transparent;
+  --min-height: 68px;
+  --border-color: transparent;
+  --border-width: 0;
+  --box-shadow: none;
+  padding: 12px 16px;
+}
+
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.park-info .tiny {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.park-info .name {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.content-padder {
+  padding: 16px;
+  padding-top: 8px;
+  padding-bottom: 120px;
+}
+
+/* Estado General del Parqueadero */
+.parking-status-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.5);
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-indicator.low { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+.status-indicator.medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+.status-indicator.high { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+.status-indicator.full { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+
+.occupation-display {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.occupation-number {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.occupation-number .current {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.occupation-number .separator {
+  font-size: 24px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.occupation-number .total {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
+.occupation-label {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.occupation-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--card-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
+  border-radius: 8px;
+  transition: width 0.6s ease;
+  box-shadow: 0 0 8px rgba(215, 255, 72, 0.4);
+}
+
+.occupation-percentage {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--card-secondary);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.stat-item ion-icon {
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Filtros por Tipo de Vehículo */
+.vehicle-filters {
+  margin-bottom: 24px;
+}
+
+.filter-header {
+  margin-bottom: 12px;
+}
+
+.tiny {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.filter-card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-card:hover {
+  border-color: rgba(215, 255, 72, 0.3);
+  transform: translateY(-2px);
+}
+
+.filter-card.selected {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, var(--card) 0%, rgba(215, 255, 72, 0.05) 100%);
+  box-shadow: 0 4px 12px rgba(215, 255, 72, 0.2);
+}
+
+.filter-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--card-secondary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+}
+
+.filter-card.selected .filter-icon {
+  background: rgba(215, 255, 72, 0.15);
+  border-color: var(--accent);
+}
+
+.filter-icon ion-icon {
+  font-size: 24px;
+  color: var(--text-secondary);
+}
+
+.filter-card.selected .filter-icon ion-icon {
+  color: var(--accent);
+}
+
+.filter-info {
+  flex: 1;
+}
+
+.filter-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.filter-availability {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.filter-availability .available {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.filter-indicator {
+  background: var(--card-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.filter-indicator.available {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+/* Sección de Espacios */
+.spaces-section {
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Vista Grid */
+.spaces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+.space-card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.space-card.available {
+  border-color: var(--success);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.space-card.occupied {
+  border-color: var(--error);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.space-card.reserved {
+  border-color: var(--warning);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.space-card.maintenance {
+  border-color: var(--muted);
+  background: rgba(156, 163, 175, 0.05);
+}
+
+.space-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.space-number {
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.space-type ion-icon {
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+.space-status {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.space-time {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Vista Lista */
+.spaces-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.space-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.space-item.available { border-left: 4px solid var(--success); }
+.space-item.occupied { border-left: 4px solid var(--error); }
+.space-item.reserved { border-left: 4px solid var(--warning); }
+.space-item.maintenance { border-left: 4px solid var(--muted); }
+
+.space-main {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex: 1;
+}
+
+.space-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.space-number {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.space-type-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.space-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.space-status-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--card-secondary);
+}
+
+.status-dot.available { background: var(--success); }
+.status-dot.occupied { background: var(--error); }
+.status-dot.reserved { background: var(--warning); }
+.status-dot.maintenance { background: var(--muted); }
+
+/* Información del Parqueadero */
+.parking-info-card {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.info-header {
+  margin-bottom: 16px;
+}
+
+.info-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.info-item ion-icon {
+  font-size: 20px;
+  color: var(--accent);
+  margin-top: 2px;
+}
+
+.info-details {
+  flex: 1;
+}
+
+.info-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Sección de Reserva */
+.reserve-section {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.reserve-card {
+  background: linear-gradient(135deg, var(--card) 0%, rgba(26, 26, 32, 0.98) 100%);
+  border: 1px solid var(--border);
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+}
+
+.reserve-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.reserve-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.reserve-type {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--card-secondary);
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.reserve-time {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+.input-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.cost-estimate {
+  text-align: right;
+}
+
+.cost-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.cost-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.reserve-btn {
+  --background: linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%);
+  --color: #0a0a0c;
+  --border-radius: 16px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 4px 16px rgba(215, 255, 72, 0.4);
+}
+
+.reserve-btn:hover {
+  --background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent) 100%);
+}
+
+/* Responsive */
+@media (max-width: 320px) {
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .spaces-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .reserve-time {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .cost-estimate {
+    text-align: left;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.parking-status-card,
+.vehicle-filters,
+.spaces-section,
+.parking-info-card {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* Select personalizado */
+ion-select {
+  --background: var(--card-secondary);
+  --color: var(--text-primary);
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  border: 1px solid var(--border);
+}

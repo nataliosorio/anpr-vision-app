@@ -1,0 +1,76 @@
+.login-wrap {
+  display: grid;
+  gap: 18px;
+  margin-top: 8vh;
+}
+
+.iso {
+  width: 92px;
+  margin: 0 auto 8px;
+  display: block;
+}
+
+.title {
+  text-align: center;
+  color: var(--anpr-text);
+  margin-bottom: 8px;
+}
+
+/* Inputs nativos con estilo parecido a ion-item */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(240, 240, 240, 0.9);
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.form-input:focus {
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.form-input::placeholder {
+  color: #999;
+}
+
+.forgot,
+.register {
+  text-align: center;
+  color: var(--anpr-muted);
+  font-size: 0.9rem;
+  margin: 10px 0;
+}
+
+.anpr-link {
+  color: #ff6b35;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}

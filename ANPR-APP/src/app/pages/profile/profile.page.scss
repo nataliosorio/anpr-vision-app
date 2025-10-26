@@ -1,0 +1,886 @@
+:host {
+  --accent: #d7ff48;
+  --accent-soft: #e8ff7a;
+  --card: #1a1a20;
+  --card-secondary: #16161c;
+  --bg: #0e0e11;
+  --muted: #9ca3af;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border: rgba(255, 255, 255, 0.08);
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --premium: #9333ea;
+  --gold: #f59e0b;
+  --silver: #64748b;
+}
+
+.dark {
+  --ion-background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+.header .toolbar {
+  --background: transparent;
+  --min-height: 68px;
+  --border-color: transparent;
+  --border-width: 0;
+  --box-shadow: none;
+  padding: 12px 16px;
+}
+
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.profile-info .tiny {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.profile-info .name {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.content-padder {
+  padding: 16px;
+  padding-top: 8px;
+  padding-bottom: 120px;
+}
+
+.tiny {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Card de Usuario */
+.user-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.5);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
+}
+
+.user-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.user-avatar {
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.user-avatar img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  object-fit: cover;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.user-avatar:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.avatar-overlay ion-icon {
+  color: white;
+  font-size: 24px;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.user-email {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.user-member-since {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.edit-profile-btn {
+  --background: var(--card-secondary);
+  --color: var(--text-secondary);
+  --border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+}
+
+.user-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.membership-level {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.level-badge.basic {
+  background: rgba(100, 116, 139, 0.15);
+  color: var(--silver);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+.level-badge.gold {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.level-badge.premium {
+  background: rgba(147, 51, 234, 0.15);
+  color: var(--premium);
+  border: 1px solid rgba(147, 51, 234, 0.3);
+}
+
+.level-progress {
+  margin-top: 12px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--card-secondary);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
+  border-radius: 6px;
+  transition: width 0.6s ease;
+}
+
+.progress-text {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Secciones Generales */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.section-count {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Vehículos */
+.vehicles-section {
+  margin-bottom: 24px;
+}
+
+.vehicles-list {
+  background: var(--card);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.vehicle-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.vehicle-item:last-child {
+  border-bottom: none;
+}
+
+.vehicle-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.vehicle-image {
+  width: 60px;
+  height: 45px;
+  background: var(--card-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.vehicle-image ion-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vehicle-details {
+  flex: 1;
+}
+
+.vehicle-plate {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.vehicle-info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.vehicle-brand {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.vehicle-year {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.vehicle-type {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.vehicle-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(156, 163, 175, 0.15);
+  color: var(--muted);
+}
+
+.status-badge.active {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+}
+
+.empty-vehicles {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty-vehicles ion-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  color: var(--muted);
+}
+
+.empty-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.empty-text {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+/* Historial */
+.history-section {
+  margin-bottom: 24px;
+}
+
+.history-list {
+  background: var(--card);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.history-icon.entry {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+}
+
+.history-icon.exit {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--error);
+}
+
+.history-icon.payment {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+}
+
+.history-details {
+  flex: 1;
+}
+
+.history-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.history-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.history-duration {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.history-cost {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.empty-history {
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty-history ion-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.empty-text {
+  font-size: 14px;
+}
+
+/* Métodos de Pago */
+.payment-section {
+  margin-bottom: 24px;
+}
+
+.payment-list {
+  background: var(--card);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.payment-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.payment-item:last-child {
+  border-bottom: none;
+}
+
+.payment-item.default {
+  background: rgba(215, 255, 72, 0.05);
+  border-left: 4px solid var(--accent);
+}
+
+.payment-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--card-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.payment-icon ion-icon {
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+.payment-details {
+  flex: 1;
+}
+
+.payment-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.payment-info {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.payment-default {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.empty-payments {
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty-payments ion-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+/* Configuraciones */
+.quick-settings {
+  margin-bottom: 24px;
+}
+
+.settings-list {
+  background: var(--card);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.setting-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--card-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.setting-icon ion-icon {
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+.setting-details {
+  flex: 1;
+}
+
+.setting-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.setting-description {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Acciones del Perfil */
+.profile-actions {
+  margin-bottom: 24px;
+}
+
+.action-group {
+  background: var(--card);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.action-btn {
+  --background: transparent;
+  --color: var(--text-secondary);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  width: 100%;
+  height: 54px;
+  justify-content: flex-start;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.action-btn:last-child {
+  border-bottom: none;
+}
+
+.action-btn:hover {
+  --background: rgba(255, 255, 255, 0.02);
+}
+
+.logout-section {
+  margin-top: 16px;
+}
+
+.logout-btn {
+  --background: transparent;
+  --border-color: var(--error);
+  --color: var(--error);
+  --border-radius: 16px;
+  height: 48px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  --background: rgba(239, 68, 68, 0.1);
+}
+
+/* Información de la App */
+.app-info {
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+}
+
+.app-version {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.app-copyright {
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* Toggles personalizados */
+ion-toggle {
+  --background: var(--card-secondary);
+  --background-checked: var(--success);
+  --handle-background: var(--text-primary);
+  --handle-background-checked: white;
+}
+
+/* Responsive */
+@media (max-width: 320px) {
+  .user-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .user-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .vehicle-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .vehicle-status {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .history-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .history-cost {
+    align-self: flex-end;
+  }
+}
+
+@media (min-width: 768px) {
+  .content-padder {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .user-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-card,
+.vehicles-section,
+.history-section,
+.payment-section,
+.quick-settings,
+.profile-actions {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* Estilos para botones específicos */
+ion-button[fill="outline"] {
+  --border-color: var(--border);
+  --color: var(--text-secondary);
+}
+
+ion-button[fill="outline"]:hover {
+  --background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mejoras para el select */
+ion-select {
+  --background: var(--card-secondary);
+  --color: var(--text-primary);
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  border: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+/* Estilos para estados de carga */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--card-secondary) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    var(--card-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Efectos hover mejorados */
+.vehicle-item:hover .vehicle-image {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+.history-item:hover .history-icon {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+.payment-item:hover .payment-icon {
+  transform: scale(1.05);
+  border-color: var(--accent);
+  transition: all 0.2s ease;
+}
+
+/* Badges mejorados */
+.level-badge ion-icon {
+  font-size: 16px;
+}
+
+.status-badge {
+  border: 1px solid transparent;
+}
+
+.status-badge.active {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1);
+}
+
+/* Scrollbar personalizada */
+.content-padder::-webkit-scrollbar {
+  width: 4px;
+}
+
+.content-padder::-webkit-scrollbar-track {
+  background: var(--card-secondary);
+}
+
+.content-padder::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+.content-padder::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}

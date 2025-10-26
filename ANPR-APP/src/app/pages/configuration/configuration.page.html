@@ -1,0 +1,109 @@
+<!-- <ion-header class="hidden"></ion-header> -->
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Configuración</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="settings-content" [fullscreen]="true">
+  <!-- CABECERA PERFIL -->
+  <section class="profile-hero">
+    <!-- <button class="back-btn" (click)="goBack()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button> -->
+
+    <!-- <div class="avatar">
+      <img *ngIf="user.avatarUrl; else initials" [src]="user.avatarUrl" alt="avatar">
+      <ng-template #initials>{{ getInitials() }}</ng-template>
+
+    </div> -->
+
+    <!-- <h2 class="name">{{ username }}</h2>
+
+    <p class="role" *ngIf="roles?.length; else noRoles">
+      {{ roles[0] }}
+    </p>
+    <ng-template #noRoles>
+      <p class="user-role">Sin roles</p>
+    </ng-template> -->
+
+    <!-- <ion-button class="upgrade" expand="block" (click)="upgrade()">
+      Ver perfil
+    </ion-button> -->
+  </section>
+
+  <!-- CARD AJUSTADA (bordes superiores súper redondeados) -->
+  <section class="settings-card">
+    <!-- <h3 class="title">Settings</h3> -->
+
+    <ion-list class="settings-list" inset="true">
+
+
+      <!-- Notifications -->
+      <ion-item class="row" (click)="open('notifications')" detail="true">
+        <div class="left">
+          <div class="dot bell"><ion-icon name="notifications-outline"></ion-icon></div>
+          <div class="label">Notificaciones</div>
+        </div>
+        <!-- <div class="right-hint">On</div> -->
+      </ion-item>
+
+      <!-- Privacy -->
+      <ion-item class="row" (click)="open('privacy')" detail="true">
+        <div class="left">
+          <div class="dot lock"><ion-icon name="lock-closed-outline"></ion-icon></div>
+          <div class="label">Privacidad</div>
+        </div>
+      </ion-item>
+
+      <!-- Security -->
+      <ion-item class="row" (click)="open('security')" detail="true">
+        <div class="left">
+          <div class="dot heart"><ion-icon name="heart-outline"></ion-icon></div>
+          <div class="label">Securidad</div>
+        </div>
+      </ion-item>
+
+      <!-- Account -->
+      <ion-item class="row" (click)="open('vehicle')" detail="true">
+        <div class="left">
+          <div class="dot user"><ion-icon name="car-sport-sharp"></ion-icon></div>
+          <div class="label">Mi vehículo</div>
+        </div>
+      </ion-item>
+
+      <ion-item class="row" (click)="open('account')" detail="true">
+        <div class="left">
+          <div class="dot user"><ion-icon name="person-sharp"></ion-icon></div>
+          <div class="label">Cuenta</div>
+        </div>
+      </ion-item>
+
+      <!-- Help -->
+      <ion-item class="row" (click)="open('help')" detail="true">
+        <div class="left">
+          <div class="dot help"><ion-icon name="help-circle-outline"></ion-icon></div>
+          <div class="label">Ayuda</div>
+        </div>
+      </ion-item>
+
+      <!-- About -->
+      <ion-item class="row" (click)="open('about')" detail="true">
+        <div class="left">
+          <div class="dot info"><ion-icon name="information-circle-outline"></ion-icon></div>
+          <div class="label">Acerca de</div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </section>
+</ion-content>

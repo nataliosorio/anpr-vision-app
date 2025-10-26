@@ -1,0 +1,156 @@
+:root {
+  --hero-grad-start: #0f0f10;
+  --hero-grad-end: #212326;
+  --card-bg: #101112;
+  --text-strong: #ffffff;
+  --text-soft: rgba(255,255,255,.72);
+  --text-mute: rgba(255,255,255,.55);
+  --pink: #ff4d97;
+  --shadow-hero: 0 18px 40px rgba(0,0,0,.45);
+  --shadow-card: 0 18px 40px rgba(0,0,0,.55);
+}
+
+/* quita el header nativo */
+.hidden { display: none; }
+
+.settings-content {
+  --background: var(--anpr-bg) !important;
+
+  // --background: linear-gradient(180deg, var(--hero-grad-start) 0%, var(--hero-grad-end) 100%);
+}
+
+/* HERO */
+.profile-hero{
+  position: relative;
+  padding: 26px 22px 18px;
+  text-align: center;
+  box-shadow: var(--shadow-hero);
+}
+
+.back-btn{
+  position:absolute; left: 14px; top: 18px;
+  width:36px; height:36px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.08);
+  display:flex; align-items:center; justify-content:center;
+  backdrop-filter: blur(2px);
+  ion-icon{ color:#fff; font-size:20px; }
+}
+
+.avatar{
+  width:96px; height:96px; border-radius:50%;
+  margin: 8px auto 12px; overflow:hidden;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45), inset 0 0 0 4px rgb(163, 163, 163);
+  display:grid; place-items:center; background:#222;
+  img{ width:100%; height:100%; object-fit:cover; display:block; }
+  ng-template{ color:#fff; font-size:28px; font-weight:700; }
+}
+
+.name{ color:white; font-weight:800; margin: 2px 0 2px; letter-spacing:.2px; }
+.sub{
+  color:var(--text-mute); margin:0;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  ion-icon{ font-size:16px; }
+}
+.role{ color:white; margin:4px 0 14px; }
+
+.upgrade{
+  --background: var(--pink);
+  --border-radius: 999px;
+  --padding-start: 18px; --padding-end: 18px;
+  --box-shadow: 0 10px 24px rgba(255,77,151,.35);
+  font-weight: 700;
+}
+
+/* CARD SETTINGS (baja con bordes súper redondeados) */
+.settings-card{
+  margin-top: 16px;
+  --background: var(--anpr-bg) !important;
+
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  box-shadow: var(--shadow-card);
+  padding: 16px 0 28px;
+  min-height: 58vh;
+
+
+}
+
+section.settings-card ion-list {
+  background: transparent;
+  color: white;
+}
+
+.title{
+  color: var(--text-strong);
+  font-size: 20px; font-weight: 800;
+  margin: 4px 22px 8px;
+}
+
+/* LISTA */
+.settings-list{
+  --background: transparent;
+
+  margin: 0 10px;
+  padding: 2px 10px 0;
+}
+
+.row{
+  --background: transparent;
+
+  --padding-start: 10px;
+  --inner-padding-end: 10px;
+  --min-height: 56px;
+  border-radius: 16px;
+  margin: 6px 0;
+  color: var(--text-soft);
+  backdrop-filter: blur(2px);
+}
+
+.left{
+  display:flex; align-items:center; gap:12px;
+}
+
+.label{
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.right-hint{ color: var(--text-mute); font-weight:600; font-size: 14px; }
+
+/* Dots de color (icon background) */
+.dot{
+  width:28px; height:28px; border-radius: 10px;
+  display:grid; place-items:center;
+  ion-icon{ font-size:16px; color:#fff; }
+}
+.moon{ background:#2d2f38; }
+.bell{ background:#f39c12; }
+.lock{ background:#e74c3c; }
+.heart{ background:#ff4d97; }
+.user{ background:#2ecc71; }
+.help{ background:#27ae60; }
+.info{ background:#16a085; }
+
+/* Toggle estilo iOS */
+ion-toggle{
+  --handle-background-checked: #fff;
+  --background-checked: #27d27d;
+}
+
+/* iOS-like corners y sombra del container entero (opcional) */
+ion-content::part(scroll){
+  padding-bottom: 18px;
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --hero-grad-start:#ffffff;
+    --hero-grad-end:#f2f3f5;
+    --card-bg:#ffffff;
+    --text-strong:#0e1116;
+    --text-soft:#1f2328;
+    --text-mute:#586069;
+  }
+  .settings-content{ --background: linear-gradient(180deg,#fff 0%,#f5f7fb 100%); }
+}

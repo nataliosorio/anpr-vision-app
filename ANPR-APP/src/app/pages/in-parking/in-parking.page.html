@@ -1,0 +1,122 @@
+<ion-header translucent="false" class="home-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Inicio</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-content" [fullscreen]="true">
+  <div class="page">
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="left">
+        <p class="muted">Activity</p>
+        <h1 class="big">{{ activity | number }}</h1>
+      </div>
+
+      <div class="right">
+        <button class="pill" (click)="cycleRange()">
+          {{ rangeLabel }}
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </button>
+
+        <button class="avatar" (click)="openProfile()">
+          <img *ngIf="user.avatarUrl; else initials" [src]="user.avatarUrl" alt="me">
+          <ng-template #initials>{{ getInitials(user.name) }}</ng-template>
+        </button>
+      </div>
+    </div>
+
+    <!-- CARD PRINCIPAL -->
+    <section class="hero-card">
+      <div class="copy">
+        <h2>My plan<br>for today</h2>
+        <p class="sub">{{ completed }} of {{ total }} complete</p>
+      </div>
+
+      <div class="ring">
+        <svg [attr.viewBox]="'0 0 ' + size + ' ' + size" [attr.width]="size" [attr.height]="size" aria-hidden="true">
+          <circle [attr.cx]="center" [attr.cy]="center" [attr.r]="radius" class="track"></circle>
+          <circle [attr.cx]="center" [attr.cy]="center" [attr.r]="radius" class="progress"
+                  [attr.stroke-dasharray]="dashArray"
+                  [attr.transform]="'rotate(-90 ' + center + ' ' + center + ')'"></circle>
+        </svg>
+        <div class="percent">{{ progress }}%</div>
+      </div>
+
+      <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+    </section>
+
+    <!-- GRID DE CARDS -->
+    <section class="cards">
+      <!-- Sleep -->
+      <article class="mini-card">
+        <div class="head">
+          <div class="icon red"><ion-icon name="bed-outline"></ion-icon></div>
+          <span>Sleep</span>
+        </div>
+        <div class="chart">
+          <svg viewBox="0 0 100 30" width="100%" height="30">
+            <polyline class="sparkline"
+              points="0,25 10,20 20,22 30,15 40,18 50,12 60,16 70,8 80,10 90,6 100,10"/>
+          </svg>
+        </div>
+        <div class="footer"><b>8</b><span>hours</span></div>
+      </article>
+
+      <!-- Water -->
+      <article class="mini-card">
+        <div class="head">
+          <div class="icon blue"><ion-icon name="water-outline"></ion-icon></div>
+          <span>Water</span>
+        </div>
+        <div class="pie">
+          <svg viewBox="0 0 72 72" width="72" height="72" aria-hidden="true">
+            <circle cx="36" cy="36" r="30" class="pie-track"></circle>
+            <circle cx="36" cy="36" r="30" class="pie-fill"
+                    [attr.stroke-dasharray]="(water/goalWater*188.4) + ', 188.4'"
+                    transform="rotate(-90 36 36)"></circle>
+            <path d="M12 46 Q36 62 60 46 Q36 70 12 46 Z" class="wave"></path>
+          </svg>
+          <span class="pie-text">{{ water }}</span><small>lts</small>
+        </div>
+      </article>
+
+      <!-- Food -->
+      <article class="mini-card">
+        <div class="head">
+          <div class="icon purple"><ion-icon name="restaurant-outline"></ion-icon></div>
+          <span>Food</span>
+        </div>
+        <div class="semi">
+          <svg viewBox="0 0 120 60" width="100%" height="60">
+            <path d="M10,50 A50,50 0 0,1 110,50" class="semi-track"/>
+            <path [attr.d]="foodPath" class="semi-fill"/>
+          </svg>
+        </div>
+        <div class="footer"><b>{{ kcal }}</b><span>kcal</span></div>
+      </article>
+
+      <!-- Exercise -->
+      <article class="mini-card">
+        <div class="head">
+          <div class="icon yellow"><ion-icon name="barbell-outline"></ion-icon></div>
+          <span>Exercise</span>
+        </div>
+        <div class="dots">
+          <i *ngFor="let d of exDots" class="dot" [style.left.%]="d.x" [style.bottom.%]="d.y"></i>
+        </div>
+        <div class="footer"><b>{{ minutes }}</b><span>min</span></div>
+      </article>
+    </section>
+
+    <div class="home-indicator"></div>
+  </div>
+</ion-content>

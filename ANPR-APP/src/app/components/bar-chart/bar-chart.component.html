@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Gráfica de Barras
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Gráfica de Barras</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Dashboard de Ventas</ion-card-title>
+        <ion-card-subtitle>Análisis mensual de rendimiento</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="chart-container">
+          <canvas #barChart></canvas>
+        </div>
+
+        <div class="chart-controls">
+          <ion-button (click)="updateChartData()" fill="outline" size="small">
+            <ion-icon name="refresh" slot="start"></ion-icon>
+            Actualizar Datos
+          </ion-button>
+
+          <ion-button (click)="changeChartType('line')" fill="outline" size="small">
+            <ion-icon name="analytics" slot="start"></ion-icon>
+            Línea
+          </ion-button>
+
+          <ion-button (click)="changeChartType('bar')" fill="outline" size="small">
+            <ion-icon name="bar-chart" slot="start"></ion-icon>
+            Barras
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Tarjetas con estadísticas adicionales -->
+    <ion-row>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-content>
+            <div class="stat-card">
+              <ion-icon name="trending-up" color="success"></ion-icon>
+              <div>
+                <h2>$156K</h2>
+                <p>Total Ventas</p>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-content>
+            <div class="stat-card">
+              <ion-icon name="people" color="primary"></ion-icon>
+              <div>
+                <h2>1,234</h2>
+                <p>Clientes</p>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

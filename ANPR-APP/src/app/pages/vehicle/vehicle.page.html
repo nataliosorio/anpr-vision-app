@@ -1,0 +1,242 @@
+<ion-header class="header ion-no-border" [translucent]="true">
+  <ion-toolbar class="toolbar">
+    <div class="greeting">
+      <div class="park-info">
+        <div class="tiny">Estacionamiento</div>
+        <div class="name">{{ parkingName }} 🅿️</div>
+      </div>
+    </div>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="refreshData()">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="toggleView()">
+        <ion-icon [name]="viewMode === 'grid' ? 'list-outline' : 'grid-outline'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="dark">
+  <div class="content-padder">
+
+    <!-- Estado General del Parqueadero -->
+    <div class="parking-status-card">
+      <div class="status-header">
+        <div class="tiny muted">Estado Actual</div>
+        <div class="status-indicator" [class]="getStatusClass()">
+          <ion-icon [name]="getStatusIcon()"></ion-icon>
+          <span>{{ getStatusText() }}</span>
+        </div>
+      </div>
+
+      <div class="occupation-display">
+        <div class="occupation-number">
+          <span class="current">{{ occupiedSpots }}</span>
+          <span class="separator">/</span>
+          <span class="total">{{ totalSpots }}</span>
+        </div>
+        <div class="occupation-label">Espacios ocupados</div>
+
+        <div class="occupation-bar">
+          <div class="bar-fill" [style.width.%]="getOccupationPercentage()"></div>
+        </div>
+        <div class="occupation-percentage">{{ getOccupationPercentage() }}% ocupado</div>
+      </div>
+
+      <!-- <div class="quick-stats">
+        <div class="stat-item">
+          <ion-icon name="time-outline"></ion-icon>
+          <div class="stat-info">
+            <div class="stat-value">{{ averageStay }}</div>
+            <div class="stat-label">Promedio estadía</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <ion-icon name="cash-outline"></ion-icon>
+          <div class="stat-info">
+            <div class="stat-value">${{ hourlyRate }}</div>
+            <div class="stat-label">Por hora</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <ion-icon name="car-sport-outline"></ion-icon>
+          <div class="stat-info">
+            <div class="stat-value">{{ availableSpots }}</div>
+            <div class="stat-label">Disponibles</div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <!-- Filtros por Tipo de Vehículo -->
+    <div class="vehicle-filters">
+      <div class="filter-header">
+        <div class="tiny muted">Disponibilidad por Tipo</div>
+      </div>
+
+      <div class="filter-grid">
+        <div
+          class="filter-card"
+          *ngFor="let filter of vehicleFilters"
+          [class.selected]="selectedVehicleType === filter.type"
+          (click)="selectVehicleType(filter.type)">
+          <div class="filter-icon">
+            <ion-icon [name]="filter.icon"></ion-icon>
+          </div>
+          <div class="filter-info">
+            <div class="filter-name">{{ filter.name }}</div>
+            <div class="filter-availability">
+              <span class="available">{{ filter.available }}</span> disponibles
+            </div>
+          </div>
+          <div class="filter-indicator" [class.available]="filter.available > 0">
+            {{ filter.available }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vista de Espacios -->
+    <div class="spaces-section">
+      <div class="section-header">
+        <div class="tiny muted">Espacios de {{ getSelectedFilterName() }}</div>
+        <ion-button size="small" fill="clear" (click)="showMap()">
+          <ion-icon name="map-outline"></ion-icon>
+          Ver mapa
+        </ion-button>
+      </div>
+
+      <!-- Vista Grid -->
+      <div class="spaces-grid" *ngIf="viewMode === 'grid'">
+        <div
+          class="space-card"
+          *ngFor="let space of getFilteredSpaces()"
+          [class]="getSpaceClass(space)"
+          (click)="selectSpace(space)">
+          <div class="space-number">{{ space.number }}</div>
+          <div class="space-type">
+            <ion-icon [name]="space.icon"></ion-icon>
+          </div>
+          <div class="space-status" *ngIf="space.status !== 'available'">
+            {{ getSpaceStatusText(space.status) }}
+          </div>
+          <div class="space-time" *ngIf="space.occupiedSince">
+            {{ getTimeOccupied(space.occupiedSince) }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Vista Lista -->
+      <div class="spaces-list" *ngIf="viewMode === 'list'">
+        <div
+          class="space-item"
+          *ngFor="let space of getFilteredSpaces()"
+          [class]="getSpaceClass(space)"
+          (click)="selectSpace(space)">
+          <div class="space-main">
+            <div class="space-id">
+              <div class="space-number">{{ space.number }}</div>
+              <div class="space-type-info">
+                <ion-icon [name]="space.icon"></ion-icon>
+                <span>{{ space.type }}</span>
+              </div>
+            </div>
+            <div class="space-details">
+              <div class="space-status-text">{{ getSpaceStatusText(space.status) }}</div>
+              <div class="space-time" *ngIf="space.occupiedSince">
+                Ocupado desde {{ getTimeOccupied(space.occupiedSince) }}
+              </div>
+            </div>
+          </div>
+          <div class="space-indicator">
+            <div class="status-dot" [class]="space.status"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información Adicional -->
+    <div class="parking-info-card">
+      <div class="info-header">
+        <div class="tiny muted">Información del Parqueadero</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <ion-icon name="location-outline"></ion-icon>
+          <div class="info-details">
+            <div class="info-label">Dirección</div>
+            <div class="info-value">{{ parkingAddress }}</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <ion-icon name="time-outline"></ion-icon>
+          <div class="info-details">
+            <div class="info-label">Horario</div>
+            <div class="info-value">{{ operatingHours }}</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <ion-icon name="shield-checkmark-outline"></ion-icon>
+          <div class="info-details">
+            <div class="info-label">Seguridad</div>
+            <div class="info-value">{{ securityFeatures }}</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <ion-icon name="card-outline"></ion-icon>
+          <div class="info-details">
+            <div class="info-label">Métodos de Pago</div>
+            <div class="info-value">{{ paymentMethods }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reservar Espacio -->
+    <div class="reserve-section" *ngIf="selectedSpace && selectedSpace.status === 'available'">
+      <div class="reserve-card">
+        <div class="reserve-header">
+          <div class="reserve-title">Reservar Espacio {{ selectedSpace.number }}</div>
+          <div class="reserve-type">
+            <ion-icon [name]="selectedSpace.icon"></ion-icon>
+            {{ selectedSpace.type }}
+          </div>
+        </div>
+
+        <div class="reserve-time">
+          <div class="time-input">
+            <div class="input-label">Duración estimada</div>
+            <ion-select [(ngModel)]="reservationDuration" placeholder="Selecciona">
+              <ion-select-option value="1">1 hora</ion-select-option>
+              <ion-select-option value="2">2 horas</ion-select-option>
+              <ion-select-option value="4">4 horas</ion-select-option>
+              <ion-select-option value="8">8 horas</ion-select-option>
+              <ion-select-option value="24">Todo el día</ion-select-option>
+            </ion-select>
+          </div>
+
+          <div class="cost-estimate">
+            <div class="cost-label">Costo estimado</div>
+            <div class="cost-value">${{ getEstimatedCost() }}</div>
+          </div>
+        </div>
+
+        <ion-button
+          expand="block"
+          class="reserve-btn"
+          (click)="makeReservation()"
+          [disabled]="!reservationDuration">
+          <ion-icon name="car-outline" slot="start"></ion-icon>
+          Reservar Ahora
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,40 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+:root {
+  --anpr-bg: #0f1a1a;         // fondo oscuro
+  --anpr-card: #172526;       // tarjetas/inputs
+  --anpr-text: #d7f1ef;       // texto principal
+  --anpr-muted: #8aa5a3;      // texto secundario
+  --anpr-primary: #00d0c6;    // turquesa botón
+  --anpr-primary-strong: #00b7ae;
+  --anpr-accent: #3dd6ff;     // detalle
+}
+
+ion-content, ion-header, ion-toolbar {
+  --background: var(--anpr-bg);
+  color: var(--anpr-text);
+}
+
+.anpr-input {
+  --background: var(--anpr-card);
+  --color: var(--anpr-text);
+  --placeholder-color: var(--anpr-muted);
+  --border-radius: 14px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --highlight-color-focused: var(--anpr-primary);
+}
+
+.anpr-btn {
+  --background: var(--anpr-primary);
+  --background-activated: var(--anpr-primary-strong);
+  --border-radius: 999px;
+  color: #0b1111;
+  font-weight: 700;
+}
+
+.anpr-link {
+  color: var(--anpr-accent);
+  text-decoration: none;
+}
+
