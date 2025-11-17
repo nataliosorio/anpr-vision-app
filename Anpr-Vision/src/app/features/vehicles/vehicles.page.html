@@ -1,0 +1,147 @@
+<ion-header [translucent]="true" class="custom-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Mis Vehículos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleFilters()">
+        <ion-icon name="filter-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="vehicles-content">
+
+  <!-- Header Section -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Mis Vehículos</h1>
+      <p class="page-subtitle">Estos son los vehículos asociados a tu cuenta ANPR Vision</p>
+
+      <!-- Estadísticas rápidas -->
+      <div class="quick-stats">
+        <div class="stat-item">
+         <span class="stat-value">{{ totalVehicles }}</span>
+          <span class="stat-label">Vehículos</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">{{ totalParked }}</span>
+          <span class="stat-label">Parqueados</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Buscador -->
+  <div class="search-section" *ngIf="vehicles.length > 1">
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      (ionInput)="onSearchChange($event)"
+      placeholder="Buscar por placa, tipo, color o cliente..."
+      mode="ios"
+      class="custom-searchbar">
+    </ion-searchbar>
+  </div>
+
+  <!-- Lista de vehículos -->
+  <div class="vehicles-list" *ngIf="filteredVehicles.length > 0">
+    <div
+      *ngFor="let vehicle of filteredVehicles"
+      class="vehicle-card"
+      [class.parked]="vehicle.currentlyParked">
+
+      <!-- Status Badge -->
+      <div class="status-badge" *ngIf="vehicle.currentlyParked">
+        <div class="pulse-dot"></div>
+        <span>En parqueadero</span>
+      </div>
+
+      <!-- Imagen o Ícono del vehículo -->
+      <div class="vehicle-header">
+        <div class="vehicle-image-container">
+          <div class="vehicle-icon-wrapper" [class]="vehicle.type">
+            <ion-icon [name]="getVehicleIcon(vehicle.type)"></ion-icon>
+          </div>
+          <div class="vehicle-type-badge">
+            {{ getVehicleTypeName(vehicle.type) }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Placa del vehículo -->
+      <div class="vehicle-plate-section">
+        <div class="plate-display">
+          <span class="plate-number">{{ vehicle.plateNumber }}</span>
+        </div>
+        <div class="vehicle-model">
+          <span>{{ vehicle.type }}</span>
+          <span class="vehicle-color" *ngIf="vehicle.color"> • {{ vehicle.color }}</span>
+        </div>
+      </div>
+
+      <!-- Información del vehículo -->
+      <div class="vehicle-info-grid">
+        <!-- Estado actual -->
+        <div class="info-section status">
+          <div class="info-header">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <span class="info-title">Estado actual</span>
+          </div>
+          <div class="info-content">
+            <div class="status-indicator" [class.active]="vehicle.currentlyParked">
+              <div class="status-dot"></div>
+              <span>
+                {{ vehicle.currentlyParked ? 'Actualmente en parqueadero' : 'Fuera del parqueadero' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ 
+
+      <!-- Información adicional -->
+      <div class="vehicle-footer">
+        <div class="footer-info">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>Cliente: {{ vehicle.client }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estado vacío -->
+  <div class="empty-state" *ngIf="filteredVehicles.length === 0 && vehicles.length > 0">
+    <div class="empty-icon">
+      <ion-icon name="search-outline"></ion-icon>
+    </div>
+    <h3>No se encontraron vehículos</h3>
+    <p>Intenta con otra búsqueda</p>
+  </div>
+
+  <!-- Sin vehículos registrados -->
+  <div class="no-vehicles-state" *ngIf="vehicles.length === 0">
+    <div class="no-vehicles-icon">
+      <ion-icon name="car-sport-outline"></ion-icon>
+    </div>
+    <h2>Aún no tienes vehículos asociados</h2>
+    <p>Cuando un parqueadero detecte tu vehículo mediante ANPR, aparecerá aquí automáticamente.</p>
+    <div class="info-card">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <div class="info-text">
+        <h4>¿Cómo funciona?</h4>
+        <p>El sistema ANPR detecta automáticamente tu placa al ingresar a un parqueadero y la vincula a tu cuenta.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Padding bottom -->
+  <div style="height: 100px;"></div>
+
+</ion-content>

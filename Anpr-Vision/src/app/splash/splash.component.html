@@ -1,0 +1,39 @@
+<div class="splash-container">
+  <!-- Fondo animado con partículas -->
+  <div class="animated-background">
+    <div class="particle" *ngFor="let particle of particles"
+         [style.left.%]="particle.x"
+         [style.top.%]="particle.y"
+         [style.animation-delay.s]="particle.delay">
+    </div>
+  </div>
+
+  <!-- Logo y contenido principal -->
+  <div class="splash-content">
+    <!-- Logo animado -->
+    <div class="logo-container">
+      <img src="assets/logo.png" alt="ANPR Vision Logo" class="app-logo">
+      <div class="logo-glow"></div>
+    </div>
+
+    <!-- Título con efecto de aparición -->
+    <h1 class="app-title">
+      <span class="title-line-1">ANPR</span>
+      <span class="title-line-2">VISION</span>
+    </h1>
+
+    <!-- Subtítulo -->
+    <p class="app-subtitle">Sistema Inteligente de Parqueadero</p>
+
+    <!-- Barra de carga animada -->
+    <div class="loading-container">
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
+      <p class="loading-text">Iniciando sistema...</p>
+    </div>
+  </div>
+
+  <!-- Versión -->
+  <div class="app-version">v1.0.0</div>
+</div>

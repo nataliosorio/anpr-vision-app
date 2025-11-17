@@ -1,0 +1,109 @@
+<ion-header [translucent]="true" class="custom-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="openMenu()">
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>ANPR VISION</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToNotifications()">
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-badge *ngIf="unreadNotifications > 0" class="notification-badge">
+          {{ unreadNotifications }}
+        </ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="home-content">
+
+  <!-- 1. Encabezado / Bienvenida -->
+  <div class="welcome-section">
+    <div class="welcome-header">
+      <div class="welcome-text">
+        <h1 class="welcome-title">👋 Hola, {{ username }} 👋</h1>
+        <p class="welcome-subtitle">Gestiona tu parqueo fácilmente</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. Estado actual del vehículo -->
+  <div class="current-status-section">
+    <!-- Si hay vehículos parqueados -->
+    <div *ngIf="parkedVehicles.length > 0" class="current-parking-card">
+      <!-- Navegación sutil si hay múltiples vehículos -->
+      <div *ngIf="parkedVehicles.length > 1" class="vehicle-nav-arrows">
+        <ion-button fill="clear" size="small" (click)="prevVehicle()" class="nav-arrow">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" size="small" (click)="nextVehicle()" class="nav-arrow">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="parking-content">
+        <!-- Indicador de parqueado -->
+        <div class="parking-status">
+          <div class="status-badge">
+            <ion-icon name="car-sport-outline"></ion-icon>
+            <span>Parqueado</span>
+          </div>
+        </div>
+
+        <!-- Placa principal -->
+        <div class="main-plate">
+          <div class="plate-display">
+            <span class="plate-number">{{ currentParkedVehicle?.plate }}</span>
+          </div>
+        </div>
+
+        <!-- Información esencial -->
+        <div class="parking-info">
+          <div class="info-row">
+            <div class="info-item">
+              <ion-icon name="time-outline"></ion-icon>
+              <span>{{ currentParkedVehicle?.timeInside }}</span>
+            </div>
+            <div class="info-item">
+              <ion-icon name="location-outline"></ion-icon>
+              <span>{{ currentParkedVehicle?.slotName }}</span>
+            </div>
+          </div>
+
+          <div class="vehicle-type-badge">
+            {{ currentParkedVehicle?.typeVehicle }}
+          </div>
+        </div>
+
+        <!-- Indicador de múltiples vehículos -->
+        <div *ngIf="parkedVehicles.length > 1" class="vehicle-indicator">
+          <span class="indicator-dot" [class.active]="i === currentVehicleIndex" *ngFor="let vehicle of parkedVehicles; let i = index"></span>
+        </div>
+      </div>
+
+      <!-- Botón de acción sutil -->
+      <div class="parking-actions">
+        <ion-button fill="clear" class="details-link" (click)="viewCurrentParkingDetails()">
+          <span>Ver todos mis vehículos</span>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Si NO hay vehículos parqueados -->
+    <div *ngIf="parkedVehicles.length === 0" class="no-parking-card">
+      <div class="no-parking-icon">
+        <ion-icon name="car-sport-outline"></ion-icon>
+      </div>
+      <h3>No tienes vehículos parqueados</h3>
+      <p>Cuando estaciones un vehículo, aparecerá aquí</p>
+    </div>
+  </div>
+
+  <!-- Padding bottom para navegación -->
+  <div style="height: 100px;"></div>
+
+</ion-content>

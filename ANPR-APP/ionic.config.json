@@ -1,7 +1,0 @@
-{
-  "name": "ANPR-APP",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}

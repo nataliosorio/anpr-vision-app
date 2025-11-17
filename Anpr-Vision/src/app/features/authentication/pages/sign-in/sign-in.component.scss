@@ -1,0 +1,384 @@
+.login-content {
+  --background: transparent;
+}
+
+// Fondo con slider de imágenes
+.background-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.background-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(4, 17, 48, 0.92) 0%,
+    rgba(4, 17, 48, 0.85) 100%
+  );
+  backdrop-filter: blur(2px);
+  z-index: 2;
+}
+
+// Contenedor principal
+.login-container {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+// Card de login
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(4, 17, 48, 0.95);
+  border-radius: 20px;
+  padding: 40px 30px;
+  border: 1px solid #30CFD0;
+  box-shadow: 0 0 30px rgba(48, 207, 208, 0.3);
+  animation: slideUp 0.6s ease-out;
+
+  // Efecto zigzag en el borde derecho
+  clip-path: polygon(
+    100% 0%,
+    95% 5%,
+    100% 10%,
+    95% 15%,
+    100% 20%,
+    95% 25%,
+    100% 30%,
+    95% 35%,
+    100% 40%,
+    95% 45%,
+    100% 50%,
+    95% 55%,
+    100% 60%,
+    95% 65%,
+    100% 70%,
+    95% 75%,
+    100% 80%,
+    95% 85%,
+    100% 90%,
+    95% 95%,
+    100% 100%,
+    0% 100%,
+    0% 0%
+  );
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Logo section
+.logo-section {
+  text-align: center;
+  margin-bottom: 35px;
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+.logo-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 15px rgba(48, 207, 208, 0.6));
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00D4FF 0%, #30CFD0 50%, #00FFB3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+// Formulario
+.login-form {
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+.form-title {
+  color: #30CFD0;
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 0 0 15px rgba(48, 207, 208, 0.4);
+}
+
+// Input wrapper
+.input-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid #30CFD0;
+  border-radius: 12px;
+  padding: 0;
+  transition: all 0.3s ease;
+
+  &:hover,
+  &:focus-within {
+    box-shadow: 0 0 15px rgba(48, 207, 208, 0.5);
+    border-color: #30CFD0;
+  }
+}
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 54px;
+  background: #30CFD0;
+  border-radius: 12px 0 0 12px;
+  color: #041130;
+  font-size: 20px;
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 22px;
+  }
+}
+
+.form-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  padding: 16px 15px;
+  outline: none;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+
+.toggle-password {
+  background: transparent;
+  border: none;
+  color: #30CFD0;
+  padding: 0 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+
+  ion-icon {
+    font-size: 22px;
+  }
+
+  &:hover {
+    color: #00FFB3;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Botón de login
+.login-button {
+  --background: linear-gradient(135deg, #0099FF 0%, #30CFD0 50%, #00FFB3 100%);
+  --background-hover: linear-gradient(135deg, #0088EE 0%, #28BFC0 50%, #00EFA3 100%);
+  --background-activated: linear-gradient(135deg, #0077DD 0%, #20AEB0 50%, #00DF93 100%);
+  --color: #ffffff;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 20px rgba(48, 207, 208, 0.5);
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+
+  ion-spinner {
+    margin-right: 8px;
+  }
+}
+
+// Olvidaste contraseña
+.forgot-password {
+  text-align: center;
+  margin-top: 20px;
+
+  p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .link-button {
+    background: transparent;
+    border: none;
+    color: #30CFD0;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      text-decoration: underline;
+      color: #00FFB3;
+    }
+  }
+}
+
+// Loading overlay
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 17, 48, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.spinner-container {
+  text-align: center;
+  color: #fff;
+  animation: fadeUp 0.5s ease-in-out;
+
+  .spinner-large {
+    width: 50px;
+    height: 50px;
+    --color: #30CFD0;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.5px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Responsive
+@media (max-width: 480px) {
+  .login-card {
+    padding: 30px 20px;
+  }
+
+  .form-title {
+    font-size: 22px;
+  }
+
+  .logo-img {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+// Custom alert styles
+::ng-deep {
+  .alert-warning,
+  .alert-error,
+  .alert-success {
+    --background: rgba(4, 17, 48, 0.98);
+    --border-color: #30CFD0;
+
+    .alert-head {
+      color: #30CFD0;
+    }
+
+    .alert-message {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}

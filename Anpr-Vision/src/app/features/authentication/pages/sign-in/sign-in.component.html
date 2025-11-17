@@ -1,0 +1,95 @@
+<ion-content [fullscreen]="true" class="login-content">
+  <!-- Fondo animado con imágenes -->
+  <div class="background-slider">
+    <div
+      *ngFor="let image of backgroundImages; let i = index"
+      class="background-slide"
+      [class.active]="currentBgIndex === i"
+      [style.background-image]="'url(' + image + ')'">
+    </div>
+    <div class="overlay-gradient"></div>
+  </div>
+
+  <!-- Contenido del formulario -->
+  <div class="login-container">
+    <div class="login-card">
+      <!-- Logo -->
+      <div class="logo-section">
+        <img src="assets/logo.png" alt="ANPR Vision Logo" class="logo-img">
+        <h2 class="app-title">ANPR VISION</h2>
+      </div>
+
+      <!-- Formulario -->
+      <form class="login-form">
+        <h3 class="form-title">Iniciar sesión</h3>
+
+        <!-- Email Input -->
+        <div class="input-wrapper">
+          <div class="input-icon">
+            <ion-icon name="mail-outline"></ion-icon>
+          </div>
+          <input
+            type="email"
+            class="form-input"
+            placeholder="Nombre de Usuario"
+            [(ngModel)]="loginDto.username"
+            name="username"
+            required
+            [disabled]="loading">
+        </div>
+
+        <!-- Password Input -->
+        <div class="input-wrapper">
+          <div class="input-icon">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+          </div>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-input"
+            placeholder="Contraseña"
+            [(ngModel)]="loginDto.password"
+            name="password"
+            required
+            [disabled]="loading">
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="showPassword = !showPassword">
+            <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
+          </button>
+        </div>
+
+        <!-- Botón de Login -->
+        <ion-button
+          expand="block"
+          class="login-button"
+          (click)="login()"
+          [disabled]="loading">
+          <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+          <span *ngIf="!loading">INICIAR SESIÓN</span>
+        </ion-button>
+
+        <!-- Olvidaste contraseña -->
+        <div class="forgot-password">
+          <p>
+            ¿Olvidaste tu contraseña?
+            <button
+              type="button"
+              class="link-button"
+              (click)="restablecerContrasena()">
+              Restablecer
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner-container">
+      <ion-spinner name="crescent" class="spinner-large"></ion-spinner>
+      <p>Verificando credenciales...</p>
+    </div>
+  </div>
+</ion-content>

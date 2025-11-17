@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="user">
+      <ion-label>Usuario</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="person">
+      <ion-label>Persona</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="selectedSegment === 'user'">
+    <ion-list>
+      <ion-item>
+        <ion-input label="Username" [(ngModel)]="user.username" placeholder="Username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Email" [(ngModel)]="user.email" type="email" placeholder="Email"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="selectedSegment === 'person'">
+    <ion-list>
+      <ion-item>
+        <ion-input label="Nombre" [(ngModel)]="person.firstName" placeholder="Nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Apellido" [(ngModel)]="person.lastName" placeholder="Apellido"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Documento" [(ngModel)]="person.document" placeholder="Documento"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Teléfono" [(ngModel)]="person.phone" type="tel" placeholder="Teléfono"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Email" [(ngModel)]="person.email" type="email" placeholder="Email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Edad" [(ngModel)]="person.age" type="number" placeholder="Edad"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-button expand="full" (click)="save()">
+    <ion-icon name="save-outline" slot="start"></ion-icon>
+    Guardar Cambios
+  </ion-button>
+</ion-content>

@@ -1,0 +1,196 @@
+.welcome-content {
+  --background: transparent;
+}
+
+.welcome-container {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+// Contenedor de imágenes
+.images-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.image-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+// Gradiente oscuro sobre las imágenes para mejor legibilidad
+.overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  z-index: 2;
+}
+
+// Contenido sobre las imágenes
+.content-overlay {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px 24px 40px;
+}
+
+.welcome-header {
+  text-align: center;
+  margin-top: auto;
+  animation: fadeInUp 1s ease-out;
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 300;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.app-name {
+  font-size: 42px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00D4FF 0%, #0099FF 50%, #00FFB3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 8px 0 16px;
+  text-shadow: none;
+  letter-spacing: 2px;
+  filter: drop-shadow(0 2px 15px rgba(0, 212, 255, 0.5));
+}
+
+.welcome-subtitle {
+  font-size: 16px;
+  color: #ffffff;
+  margin: 0;
+  opacity: 0.95;
+  line-height: 1.5;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  padding: 0 20px;
+}
+
+// Indicadores de página
+.page-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 30px 0 20px;
+  animation: fadeIn 1s ease-out 0.3s both;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+
+  &.active {
+    width: 24px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #00D4FF 0%, #00FFB3 100%);
+    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.4);
+  }
+}
+
+.welcome-footer {
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.login-button {
+  --background: linear-gradient(135deg, #0099FF 0%, #00D4FF 50%, #00FFB3 100%);
+  --background-hover: linear-gradient(135deg, #0088EE 0%, #00C4EF 50%, #00EFA3 100%);
+  --background-activated: linear-gradient(135deg, #0077DD 0%, #00B4DF 50%, #00DF93 100%);
+  --color: #ffffff;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 20px rgba(0, 153, 255, 0.5);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  height: 56px;
+  margin-top: 20px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+// Animaciones
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Responsive
+@media (max-height: 667px) {
+  .welcome-title {
+    font-size: 24px;
+  }
+
+  .app-name {
+    font-size: 36px;
+  }
+
+  .welcome-subtitle {
+    font-size: 14px;
+  }
+}

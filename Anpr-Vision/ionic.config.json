@@ -1,0 +1,7 @@
+{
+  "name": "Anpr-Vision",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

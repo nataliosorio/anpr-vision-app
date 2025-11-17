@@ -1,0 +1,919 @@
+.home-content {
+  --background: #0d1b2a;
+}
+
+// Custom header
+.custom-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+    --color: #ffffff;
+    --border-width: 0;
+
+    ion-title {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #00D4FF 0%, #30CFD0 50%, #00FFB3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    ion-button {
+      position: relative;
+
+      ion-icon {
+        font-size: 24px;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.notification-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+// 1. Welcome Section
+.welcome-section {
+  background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #0d1b2a 100%);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      ellipse at 50% 20%,
+      rgba(48, 207, 208, 0.15) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+}
+
+.welcome-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.welcome-text {
+  flex: 1;
+}
+
+.welcome-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px;
+}
+
+.welcome-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-avatar-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #30CFD0 0%, #00D4FF 100%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(48, 207, 208, 0.3);
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(48, 207, 208, 0.4);
+  }
+}
+
+.edit-profile-btn {
+  --color: #30CFD0;
+  --padding-start: 8px;
+  --padding-end: 8px;
+
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+// 2. Current Status Section
+.current-status-section {
+  padding: 20px;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.current-parking-card {
+  background: linear-gradient(135deg, rgba(27, 38, 59, 0.9) 0%, rgba(13, 27, 42, 0.9) 100%);
+  border: 1px solid rgba(48, 207, 208, 0.2);
+  border-radius: 16px;
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00D4FF 0%, #30CFD0 100%);
+  }
+}
+
+.vehicle-nav-arrows {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  right: 8px;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 10;
+
+  .nav-arrow {
+    pointer-events: auto;
+    --color: rgba(255, 255, 255, 0.6);
+    --padding-start: 4px;
+    --padding-end: 4px;
+    min-width: 32px;
+    height: 32px;
+
+    &:hover {
+      --color: #30CFD0;
+    }
+
+    ion-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+.parking-content {
+  text-align: center;
+}
+
+.parking-status {
+  margin-bottom: 12px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #10b981;
+
+  ion-icon {
+    font-size: 14px;
+  }
+}
+
+.main-plate {
+  margin-bottom: 16px;
+}
+
+.plate-display {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: 10px 20px;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.plate-number {
+  font-size: 24px;
+  font-weight: 900;
+  color: #000000;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 3px;
+}
+
+.parking-info {
+  margin-bottom: 16px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+
+  ion-icon {
+    font-size: 16px;
+    color: #30CFD0;
+  }
+}
+
+.vehicle-type-badge {
+  display: inline-block;
+  background: rgba(48, 207, 208, 0.15);
+  color: #30CFD0;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(48, 207, 208, 0.3);
+}
+
+.vehicle-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+
+  &.active {
+    background: #30CFD0;
+    transform: scale(1.2);
+  }
+}
+
+.parking-actions {
+  border-top: 1px solid rgba(48, 207, 208, 0.1);
+  padding-top: 16px;
+  text-align: center;
+}
+
+.details-link {
+  --color: #30CFD0;
+  --padding-start: 0;
+  --padding-end: 0;
+  font-size: 14px;
+  font-weight: 500;
+
+  span {
+    margin-right: 4px;
+  }
+
+  ion-icon {
+    font-size: 14px;
+  }
+}
+
+.no-parking-card {
+  background: linear-gradient(135deg, rgba(27, 38, 59, 0.6) 0%, rgba(13, 27, 42, 0.6) 100%);
+  border: 1px solid rgba(48, 207, 208, 0.2);
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.no-parking-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: rgba(48, 207, 208, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.no-parking-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 10px;
+}
+
+.no-parking-card p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 24px;
+}
+
+.no-parking-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  ion-button {
+    --border-radius: 12px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    font-weight: 600;
+    font-size: 14px;
+
+    &[fill="outline"] {
+      --border-color: #30CFD0;
+      --color: #30CFD0;
+    }
+  }
+}
+
+// Section Title (Reutilizable)
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+
+  ion-icon {
+    font-size: 22px;
+    color: #30CFD0;
+  }
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  ion-button {
+    --color: #30CFD0;
+    font-size: 13px;
+    font-weight: 600;
+
+    ion-icon {
+      font-size: 16px;
+    }
+  }
+}
+
+// 3. History Section
+.history-section {
+  padding: 20px;
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.history-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-card {
+  background: linear-gradient(135deg, rgba(27, 38, 59, 0.6) 0%, rgba(13, 27, 42, 0.6) 100%);
+  border: 1px solid rgba(48, 207, 208, 0.15);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.history-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 22px;
+    color: #ffffff;
+  }
+}
+
+.history-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.history-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+
+  .meta-separator {
+    color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.history-cost {
+  flex-shrink: 0;
+}
+
+.cost-amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: #30CFD0;
+}
+
+// 4. Membership Section
+.membership-section {
+  padding: 20px;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+
+  .section-title {
+    margin-bottom: 16px;
+  }
+}
+
+.membership-card {
+  border-radius: 18px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+
+  &.active {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(217, 119, 6, 0.2) 100%);
+    border: 2px solid rgba(251, 191, 36, 0.5);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      background: rgba(251, 191, 36, 0.1);
+      border-radius: 50%;
+      transform: translate(40%, -40%);
+    }
+  }
+
+  &.inactive {
+    background: linear-gradient(135deg, rgba(27, 38, 59, 0.6) 0%, rgba(13, 27, 42, 0.6) 100%);
+    border: 1px solid rgba(48, 207, 208, 0.2);
+    text-align: center;
+  }
+}
+
+.membership-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(251, 191, 36, 0.3);
+  border: 1px solid rgba(251, 191, 36, 0.6);
+  border-radius: 20px;
+  padding: 6px 12px;
+  margin-bottom: 14px;
+
+  ion-icon {
+    font-size: 16px;
+    color: #fbbf24;
+  }
+
+  span {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fbbf24;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.membership-content {
+  position: relative;
+  z-index: 2;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px;
+  }
+
+  .membership-expiry {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 16px;
+    display: block;
+  }
+}
+
+.membership-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  ion-icon {
+    font-size: 18px;
+    color: #10b981;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.membership-btn {
+  --border-color: rgba(251, 191, 36, 0.6);
+  --color: #fbbf24;
+  --border-radius: 10px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.membership-promo-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: rgba(48, 207, 208, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 32px;
+    color: #30CFD0;
+  }
+}
+
+.membership-card.inactive {
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 10px;
+  }
+
+  p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 20px;
+  }
+
+  ion-button {
+    --background: linear-gradient(135deg, #0099FF 0%, #30CFD0 100%);
+    --border-radius: 12px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    font-weight: 600;
+  }
+}
+
+// 5. Notifications Section
+.notifications-section {
+  padding: 20px;
+  animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification-item {
+  background: linear-gradient(135deg, rgba(27, 38, 59, 0.6) 0%, rgba(13, 27, 42, 0.6) 100%);
+  border: 1px solid rgba(48, 207, 208, 0.15);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &.unread {
+    background: linear-gradient(135deg, rgba(48, 207, 208, 0.1) 0%, rgba(0, 153, 255, 0.1) 100%);
+    border-color: rgba(48, 207, 208, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.notification-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+  &.detection {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  }
+
+  &.payment {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  }
+
+  &.alert {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  }
+
+  &.info {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  }
+}
+
+.notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px;
+}
+
+.notification-message {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 6px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.notification-time {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.unread-dot {
+  position: absolute;
+  top: 16px;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  background: #30CFD0;
+  border-radius: 50%;
+}
+
+// 6. Quick Actions Section
+.quick-actions-section {
+  padding: 20px;
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+
+  .section-title {
+    margin-bottom: 16px;
+  }
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.quick-action-card {
+  background: linear-gradient(135deg, rgba(27, 38, 59, 0.8) 0%, rgba(13, 27, 42, 0.8) 100%);
+  border: 1px solid rgba(48, 207, 208, 0.2);
+  border-radius: 14px;
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.action-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 24px;
+    color: #ffffff;
+  }
+
+  &.vehicle {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  }
+
+  &.payment {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  }
+
+  &.notification {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  }
+
+  &.settings {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  }
+}
+
+.action-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.action-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+// Responsive
+@media (max-width: 375px) {
+  .welcome-title {
+    font-size: 22px;
+  }
+
+  .current-parking-card {
+    padding: 20px 16px;
+  }
+
+  .plate-number {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  .info-row {
+    gap: 16px;
+  }
+
+  .info-item {
+    font-size: 13px;
+  }
+
+  .quick-actions-grid {
+    gap: 10px;
+  }
+
+  .quick-action-card {
+    padding: 14px 8px;
+  }
+
+  .action-icon {
+    width: 44px;
+    height: 44px;
+
+    ion-icon {
+      font-size: 22px;
+    }
+  }
+
+  .action-label {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 768px) {
+  .parking-details-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .history-scroll {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}

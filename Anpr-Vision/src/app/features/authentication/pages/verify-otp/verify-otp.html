@@ -1,0 +1,92 @@
+<ion-content [fullscreen]="true" class="verify-content">
+  <!-- Fondo animado similar al login -->
+  <div class="background-slider">
+    <div
+      *ngFor="let image of backgroundImages; let i = index"
+      class="background-slide"
+      [class.active]="currentBgIndex === i"
+      [style.background-image]="'url(' + image + ')'">
+    </div>
+    <div class="overlay-gradient"></div>
+  </div>
+
+  <!-- Contenedor principal -->
+  <div class="verify-container">
+    <div class="verify-card">
+      <!-- Header con logo -->
+      <div class="header-section">
+        <div class="logo-icon">
+          <ion-icon name="shield-checkmark-outline"></ion-icon>
+        </div>
+        <h2 class="verify-title">Verificar Código</h2>
+        <p class="verify-subtitle">
+          Ingresa el código de 6 dígitos enviado a tu correo electrónico
+        </p>
+      </div>
+
+      <!-- Formulario OTP -->
+      <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()" class="otp-form">
+        <!-- Cajas OTP -->
+        <div class="otp-grid">
+          <input
+            *ngFor="let i of otpIdx"
+            class="otp-box"
+            [id]="'otp-' + i"
+            type="text"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            maxlength="1"
+            [formControlName]="i.toString()"
+            (input)="onOtpInput(i, $event)"
+            (keydown)="onOtpKeydown(i, $event)"
+            (paste)="onOtpPaste($event)"
+            [disabled]="loading"
+            autocomplete="off">
+        </div>
+
+        <!-- Botón verificar -->
+        <ion-button
+          expand="block"
+          type="submit"
+          class="verify-button"
+          [disabled]="loading || otpForm.invalid">
+          <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+          <span *ngIf="!loading">VERIFICAR CÓDIGO</span>
+        </ion-button>
+
+        <!-- Botón volver -->
+        <ion-button
+          expand="block"
+          fill="outline"
+          class="back-button"
+          (click)="backToLogin()"
+          [disabled]="loading">
+          <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+          Volver a iniciar sesión
+        </ion-button>
+
+        <!-- Reenviar código -->
+        <div class="resend-section">
+          <p class="resend-text">
+            ¿No recibiste el código?
+            <button
+              type="button"
+              class="resend-link"
+              (click)="resendCode()"
+              [disabled]="loading || resendDisabled">
+              {{ resendDisabled ? `Reenviar en ${countdown}s` : 'Reenviar código' }}
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner-container">
+      <ion-spinner name="crescent" class="spinner-large"></ion-spinner>
+      <p>Verificando código...</p>
+    </div>
+  </div>
+</ion-content>

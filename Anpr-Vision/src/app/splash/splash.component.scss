@@ -1,0 +1,311 @@
+.splash-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #0d1b2a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+// Fondo animado con partículas
+.animated-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #00D4FF 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 4s infinite ease-in-out;
+  opacity: 0;
+
+  &:nth-child(2n) {
+    background: radial-gradient(circle, #00FFB3 0%, transparent 70%);
+    animation-duration: 5s;
+  }
+
+  &:nth-child(3n) {
+    background: radial-gradient(circle, #0099FF 0%, transparent 70%);
+    animation-duration: 6s;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-50px) scale(1.5);
+  }
+}
+
+// Contenido principal
+.splash-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// Logo animado
+.logo-container {
+  position: relative;
+  margin-bottom: 30px;
+  animation: logoAppear 1s ease-out forwards;
+}
+
+.app-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.6));
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+.logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+// Título
+.app-title {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.title-line-1,
+.title-line-2 {
+  display: block;
+  background: linear-gradient(135deg, #00D4FF 0%, #0099FF 50%, #00FFB3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+  letter-spacing: 3px;
+}
+
+.title-line-1 {
+  animation: slideInLeft 0.8s ease-out 0.5s both;
+}
+
+.title-line-2 {
+  animation: slideInRight 0.8s ease-out 0.7s both;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Subtítulo
+.app-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 300;
+  margin: 15px 0 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeIn 1s ease-out 1s both;
+}
+
+// Barra de carga
+.loading-container {
+  margin-top: 60px;
+  width: 250px;
+  animation: fadeIn 1s ease-out 1.5s both;
+}
+
+.loading-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #00D4FF 0%, #0099FF 50%, #00FFB3 100%);
+  border-radius: 2px;
+  animation: loadingProgress 3s ease-in-out forwards;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes loadingProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.loading-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  margin-top: 12px;
+  letter-spacing: 1px;
+  animation: loadingTextPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingTextPulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// Versión
+.app-version {
+  position: absolute;
+  bottom: 30px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  letter-spacing: 1px;
+  animation: fadeIn 1s ease-out 2s both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// Responsive
+@media (max-height: 667px) {
+  .app-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo-glow {
+    width: 140px;
+    height: 140px;
+  }
+
+  .app-title {
+    font-size: 40px;
+  }
+
+  .app-subtitle {
+    font-size: 12px;
+  }
+
+  .loading-container {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 375px) {
+  .app-title {
+    font-size: 38px;
+  }
+
+  .loading-container {
+    width: 200px;
+  }
+}
