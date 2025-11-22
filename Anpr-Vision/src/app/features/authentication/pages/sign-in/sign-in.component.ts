@@ -45,6 +45,7 @@ export class LoginPage implements OnInit, OnDestroy {
 
   showPassword = false;
   loading = false;
+  isLoggingIn = false;
   tempUserId: number | null = null;
 
   // Imágenes de fondo
@@ -93,24 +94,31 @@ export class LoginPage implements OnInit, OnDestroy {
   /**
    * Login - Paso 1: Validar credenciales y enviar código OTP
    */
-  async login() {
-    // Validación de campos
-    if (!this.loginDto.username || !this.loginDto.password) {
-      await this.showAlert(
-        'Campos incompletos',
-        'Por favor, ingresa tu usuario y contraseña.',
-        'warning'
-      );
-      return;
-    }
+   async login() {
+     // Validación de campos
+     if (!this.loginDto.username || !this.loginDto.password) {
+       await this.showAlert(
+         'Campos incompletos',
+         'Por favor, ingresa tu usuario y contraseña.',
+         'warning'
+       );
+       return;
+     }
 
-    this.loading = true;
+     if (this.isLoggingIn) {
+       return;
+     }
+
+     this.loading = true;
+     this.isLoggingIn = true;
 
     this.authService.login(this.loginDto).subscribe({
       next: async (resp: ApiResponse<{ userId: number }>) => {
         console.log('✅ Respuesta del login:', resp);
 
         if (!resp?.success) {
+          this.loading = false;
+          this.isLoggingIn = false;
           await this.showAlert(
             'Error',
             resp?.message || 'Error de autenticación.',
@@ -123,7 +131,8 @@ export class LoginPage implements OnInit, OnDestroy {
         console.log('🧩 UserId recibido:', this.tempUserId);
 
         // Mostrar mensaje de éxito
-        await this.showToast(
+        await this.showAlert(
+          '¡Éxito!',
           resp.message || 'Código enviado a tu correo electrónico',
           'success'
         );
@@ -141,6 +150,8 @@ export class LoginPage implements OnInit, OnDestroy {
       },
       error: async (err: Error) => {
         console.error('❌ Error en login:', err);
+        this.loading = false;
+        this.isLoggingIn = false;
         await this.showAlert(
           'Error de autenticación',
           err?.message || 'Credenciales incorrectas o servidor no disponible.',
@@ -149,6 +160,7 @@ export class LoginPage implements OnInit, OnDestroy {
       },
       complete: () => {
         this.loading = false;
+        this.isLoggingIn = false;
       }
     });
   }

@@ -1,0 +1,321 @@
+.dashboard-card {
+  background: linear-gradient(135deg, rgba(27, 38, 59, 0.9) 0%, rgba(13, 27, 42, 0.9) 100%);
+  border: 1px solid rgba(48, 207, 208, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin: 16px 0;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      ellipse at 50% 20%,
+      rgba(48, 207, 208, 0.1) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+}
+
+.dashboard-header {
+  padding: 20px 20px 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.dashboard-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+
+  ion-icon {
+    font-size: 22px;
+    color: #30CFD0;
+  }
+}
+
+.dashboard-content {
+  padding: 0 20px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.no-parking-container {
+  text-align: center;
+  padding: 40px 20px;
+
+  .no-parking-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: rgba(48, 207, 208, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 40px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  .no-parking-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 10px;
+  }
+
+  .no-parking-message {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+.loading-container, .error-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.parking-info {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(48, 207, 208, 0.08);
+  border: 1px solid rgba(48, 207, 208, 0.15);
+  border-radius: 12px;
+
+  .parking-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+
+    ion-icon {
+      font-size: 18px;
+      color: #30CFD0;
+    }
+  }
+
+  .parking-location {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.occupancy-section {
+  margin-bottom: 20px;
+}
+
+.occupancy-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  background: rgba(48, 207, 208, 0.08);
+  border: 1px solid rgba(48, 207, 208, 0.15);
+  border-radius: 12px;
+  padding: 16px 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  .stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #30CFD0 0%, #00D4FF 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 18px;
+      color: #ffffff;
+    }
+  }
+
+  .stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.progress-container {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(48, 207, 208, 0.05);
+  border: 1px solid rgba(48, 207, 208, 0.1);
+  border-radius: 12px;
+
+  .occupancy-progress {
+    height: 10px;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    --background: rgba(255, 255, 255, 0.1);
+  }
+
+  .progress-label {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+}
+
+.occupancy-indicator {
+  padding: 16px;
+  background: rgba(48, 207, 208, 0.05);
+  border: 1px solid rgba(48, 207, 208, 0.1);
+  border-radius: 12px;
+
+  .indicator-circles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+
+  .indicator-circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    &.occupied {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+    }
+
+    &.free {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+    }
+  }
+
+  .indicator-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+
+    .legend-circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+
+      &.occupied {
+        background: #ef4444;
+      }
+
+      &.free {
+        background: #10b981;
+      }
+    }
+
+    ion-text {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 480px) {
+  .dashboard-card {
+    margin: 12px 0;
+  }
+
+  .dashboard-header {
+    padding: 16px 16px 8px;
+  }
+
+  .dashboard-content {
+    padding: 0 16px 16px;
+  }
+
+  .parking-info {
+    padding: 12px;
+  }
+
+  .occupancy-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .stat-item {
+    padding: 12px 8px;
+
+    .stat-icon {
+      width: 32px;
+      height: 32px;
+
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+
+    .stat-value {
+      font-size: 18px;
+    }
+  }
+
+  .progress-container {
+    padding: 12px;
+  }
+
+  .occupancy-indicator {
+    padding: 12px;
+
+    .indicator-circles {
+      gap: 4px;
+    }
+
+    .indicator-circle {
+      width: 12px;
+      height: 12px;
+    }
+
+    .indicator-legend {
+      gap: 16px;
+    }
+  }
+}

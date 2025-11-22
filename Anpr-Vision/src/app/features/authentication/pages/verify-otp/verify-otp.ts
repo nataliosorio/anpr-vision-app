@@ -44,6 +44,7 @@ export class VerifyOtpPage implements OnInit, OnDestroy {
   otpForm!: FormGroup;
   otpIdx = [0, 1, 2, 3, 4, 5];
   loading = false;
+  loadingText = 'Verificando código...';
 
   // Resend countdown
   resendDisabled = true;
@@ -160,6 +161,7 @@ export class VerifyOtpPage implements OnInit, OnDestroy {
     }
 
     this.loading = true;
+    this.loadingText = 'Verificando código...';
 
     const otpCode = Object.values(this.otpForm.value).join('');
     const dto: VerificationRequestDto = {
@@ -189,7 +191,11 @@ export class VerifyOtpPage implements OnInit, OnDestroy {
         localStorage.setItem('rolesByParking', JSON.stringify(data.rolesByParking));
 
         // Mostrar mensaje de éxito
-        await this.showToast('Has iniciado sesión correctamente', 'success');
+        await this.showAlert(
+          '¡Inicio de sesión exitoso!',
+          'Has iniciado sesión correctamente.',
+          'success'
+        );
 
         // Navegar a la siguiente pantalla
         setTimeout(() => {
@@ -198,6 +204,7 @@ export class VerifyOtpPage implements OnInit, OnDestroy {
       },
       error: async (err: Error) => {
         console.error('❌ Error en verificación:', err);
+        this.loading = false;
         await this.showAlert(
           'Error de verificación',
           err?.message || 'Código incorrecto o expirado.',
@@ -222,6 +229,7 @@ export class VerifyOtpPage implements OnInit, OnDestroy {
     if (this.resendDisabled) return;
 
     this.loading = true;
+    this.loadingText = 'Enviando código nuevamente...';
 
     // Crear nuevo LoginDto para reenviar
     const loginDto = {
@@ -232,7 +240,11 @@ export class VerifyOtpPage implements OnInit, OnDestroy {
     this.authService.login(loginDto).subscribe({
       next: async (resp) => {
         if (resp?.success) {
-          await this.showToast('Código reenviado correctamente', 'success');
+          await this.showAlert(
+            '¡Código reenviado!',
+            'Se ha enviado un nuevo código a tu correo electrónico.',
+            'success'
+          );
 
           // Limpiar formulario y reiniciar countdown
           this.otpForm.reset();

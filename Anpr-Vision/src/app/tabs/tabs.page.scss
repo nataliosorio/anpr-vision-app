@@ -1,1 +1,135 @@
+// Estilos base para el tab bar
+ion-tab-bar {
+  --background: linear-gradient(135deg, rgba(4, 17, 48, 0.95) 0%, rgba(10, 25, 60, 0.95) 100%);
+  --border: none;
+  border-top: none;
+  box-shadow: 0 -4px 20px rgba(0, 212, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 4px 0 8px 0;
+  min-height: 56px;
+}
 
+ion-tab-button {
+  // Variables CSS de Ionic
+  --color: rgba(176, 176, 176, 0.8);
+  --color-selected: #00d4ff;
+  --background: transparent;
+  --background-focused: transparent;
+  --background-hover: transparent;
+  --ripple-color: rgba(0, 212, 255, 0.2);
+
+  // Layout básico
+  min-height: 50px;
+  position: relative;
+  overflow: visible;
+
+  // Transiciones suaves
+  transition: all 0.3s ease;
+
+  // Estilos del icono
+  ion-icon {
+    font-size: 24px;
+    color: rgba(176, 176, 176, 0.8);
+    transition: all 0.3s ease;
+    margin-bottom: 2px;
+  }
+
+  // Estilos del label
+  ion-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(176, 176, 176, 0.8);
+    transition: all 0.3s ease;
+    margin-top: 2px;
+  }
+
+  // Efecto de fondo circular
+  &::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 48px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.4s ease;
+    pointer-events: none;
+  }
+
+  // Estado seleccionado
+  &.tab-selected {
+    ion-icon {
+      color: #00d4ff;
+      transform: translateY(-2px);
+      filter: drop-shadow(0 2px 8px rgba(0, 212, 255, 0.5));
+    }
+
+    ion-label {
+      color: #00d4ff;
+      font-weight: 600;
+    }
+
+    &::before {
+      opacity: 1;
+      transform: translateX(-50%) scale(1.1);
+    }
+  }
+
+  // Hover (solo en no seleccionados)
+  &:not(.tab-selected):hover {
+    ion-icon {
+      color: rgba(176, 176, 176, 1);
+      transform: translateY(-1px);
+    }
+
+    ion-label {
+      color: rgba(176, 176, 176, 1);
+    }
+  }
+}
+
+// Responsive para pantallas pequeñas
+@media (max-width: 480px) {
+  ion-tab-bar {
+    min-height: 50px;
+    padding: 2px 0 6px 0;
+  }
+
+  ion-tab-button {
+    min-height: 48px;
+
+    ion-icon {
+      font-size: 22px;
+    }
+
+    ion-label {
+      font-size: 10px;
+    }
+
+    &::before {
+      width: 44px;
+      height: 44px;
+    }
+  }
+}
+
+// Para pantallas muy pequeñas
+@media (max-width: 360px) {
+  ion-tab-button {
+    ion-icon {
+      font-size: 20px;
+    }
+
+    ion-label {
+      font-size: 9px;
+    }
+
+    &::before {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

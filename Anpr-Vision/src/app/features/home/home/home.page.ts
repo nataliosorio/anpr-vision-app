@@ -36,20 +36,11 @@ import {
   checkmarkCircleOutline,
   eyeOutline,
   chevronBackOutline,
-  chevronForward
+  flashOutline
 } from 'ionicons/icons';
 import { VehicleService } from '../../vehicles/services/vehicle.service';
 import { VehicleWithStatusDto } from '../../vehicles/models/vehicle.model';
-
-interface CurrentParking {
-  plateNumber: string;
-  entryTime: Date;
-  parkingName: string;
-  parkingAddress: string;
-  accumulatedCost: number;
-  spotNumber: string;
-  image?: string;
-}
+import { MiniDashboardComponent } from '../components/mini-dashboard/mini-dashboard.component';
 
 interface HistoryItem {
   id: number;
@@ -59,13 +50,6 @@ interface HistoryItem {
   exitDate: Date;
   duration: string;
   cost: number;
-}
-
-interface Membership {
-  type: string;
-  expiryDate: Date;
-  benefits: string[];
-  color: string;
 }
 
 interface Notification {
@@ -92,55 +76,18 @@ interface Notification {
     IonButton,
     IonButtons,
     IonIcon,
-    IonBadge
+    IonBadge,
+    MiniDashboardComponent
   ]
 })
 export class HomePage implements OnInit {
 
-  username: string = 'Karol';
+  username: string = 'Usuario';
+  parkingId: number | null = null;
 
   // Vehículos parqueados
   parkedVehicles: VehicleWithStatusDto[] = [];
   currentVehicleIndex: number = 0;
-
-  // Membresía activa
-  activeMembership: Membership | null = {
-    type: 'Oro',
-    expiryDate: new Date('2025-12-12'),
-    benefits: ['20% descuento', 'Reservas prioritarias', 'Soporte 24/7'],
-    color: 'gold'
-  };
-
-  // Historial reciente (últimos 3-4 registros)
-  recentHistory: HistoryItem[] = [
-    {
-      id: 1,
-      plateNumber: 'ABC-123',
-      parkingName: 'Parqueadero Gran Estación',
-      entryDate: new Date('2025-11-11T14:30:00'),
-      exitDate: new Date('2025-11-11T17:50:00'),
-      duration: '3h 20min',
-      cost: 15000
-    },
-    {
-      id: 2,
-      plateNumber: 'ABC-123',
-      parkingName: 'Parking Unicentro',
-      entryDate: new Date('2025-11-10T09:15:00'),
-      exitDate: new Date('2025-11-10T11:00:00'),
-      duration: '1h 45min',
-      cost: 7000
-    },
-    {
-      id: 3,
-      plateNumber: 'ABC-123',
-      parkingName: 'Estacionamiento Atlantis',
-      entryDate: new Date('2025-11-08T16:00:00'),
-      exitDate: new Date('2025-11-08T18:30:00'),
-      duration: '2h 30min',
-      cost: 10000
-    }
-  ];
 
   // Notificaciones recientes
   recentNotifications: Notification[] = [
@@ -159,18 +106,8 @@ export class HomePage implements OnInit {
       timestamp: new Date('2025-11-11T17:50:00'),
       read: true,
       type: 'payment'
-    },
-    {
-      id: 3,
-      title: 'Membresía próxima a vencer',
-      message: 'Tu membresía Oro vence el 12 de diciembre',
-      timestamp: new Date('2025-11-10T10:00:00'),
-      read: true,
-      type: 'alert'
     }
   ];
-
-  // Removed parking duration logic
 
   private router = inject(Router);
   private menuController = inject(MenuController);
@@ -198,21 +135,40 @@ export class HomePage implements OnInit {
       ribbonOutline,
       alertCircleOutline,
       checkmarkCircleOutline,
-      eyeOutline
+      eyeOutline,
+      flashOutline
     });
   }
 
   ngOnInit() {
     this.loadUserData();
+    this.loadParkingId();
     this.loadParkedVehicles();
-  }
-
-  ngOnDestroy() {
-    // No intervals to clear
   }
 
   loadUserData() {
     this.username = localStorage.getItem('username') || 'Usuario';
+  }
+
+  loadParkingId() {
+    // Intentar obtener de rolesByParking en localStorage
+    const rolesByParkingStr = localStorage.getItem('rolesByParking');
+    if (rolesByParkingStr) {
+      try {
+        const rolesByParking = JSON.parse(rolesByParkingStr);
+        if (Array.isArray(rolesByParking) && rolesByParking.length > 0) {
+          // Tomar el primer parkingId disponible
+          this.parkingId = rolesByParking[0].parkingId;
+          // Guardar en localStorage para acceso rápido
+          if (this.parkingId) {
+            localStorage.setItem('parkingId', this.parkingId.toString());
+          }
+        }
+      } catch (error) {
+        console.error('Error parsing rolesByParking:', error);
+      }
+    }
+    // Si no hay rolesByParking o parkingId, queda null
   }
 
   loadParkedVehicles() {
@@ -224,6 +180,12 @@ export class HomePage implements OnInit {
       next: (response) => {
         if (response.success && response.data) {
           this.parkedVehicles = response.data.filter(v => v.isInside);
+          // Extraer parkingId del primer vehículo si existe
+          if (this.parkedVehicles.length > 0 && this.parkedVehicles[0].parkingId) {
+            this.parkingId = this.parkedVehicles[0].parkingId;
+            // Guardar en localStorage para futuras sesiones
+            localStorage.setItem('parkingId', this.parkingId.toString());
+          }
         }
       },
       error: (err: Error) => {
@@ -231,8 +193,6 @@ export class HomePage implements OnInit {
       }
     });
   }
-
-  // Removed updateParkingDuration
 
   get unreadNotifications(): number {
     return this.recentNotifications.filter(n => !n.read).length;
@@ -251,28 +211,14 @@ export class HomePage implements OnInit {
     this.router.navigate(['/profile']);
   }
 
-  editProfile() {
-    this.router.navigate(['/profile/edit']);
-  }
-
   // Current parking actions
   viewCurrentParkingDetails() {
-    // Navegar a la página de vehículos para ver detalles completos
     this.router.navigate(['/vehicles']);
   }
 
-  nextVehicle() {
-    if (this.parkedVehicles.length > 1) {
-      this.currentVehicleIndex = (this.currentVehicleIndex + 1) % this.parkedVehicles.length;
-    }
-  }
-
-  prevVehicle() {
-    if (this.parkedVehicles.length > 1) {
-      this.currentVehicleIndex = this.currentVehicleIndex === 0
-        ? this.parkedVehicles.length - 1
-        : this.currentVehicleIndex - 1;
-    }
+  selectVehicle(index: number) {
+    this.currentVehicleIndex = index;
+    this.showToast(`Vehículo ${this.parkedVehicles[index].plate} seleccionado`);
   }
 
   get currentParkedVehicle(): VehicleWithStatusDto | null {
@@ -288,26 +234,9 @@ export class HomePage implements OnInit {
     this.router.navigate(['/history']);
   }
 
-  viewHistoryDetail(item: HistoryItem) {
-    this.router.navigate(['/history-detail', item.id]);
-  }
-
-  // Membership actions
-  viewMembershipDetails() {
-    this.router.navigate(['/membership']);
-  }
-
-  acquireMembership() {
-    this.router.navigate(['/membership/plans']);
-  }
-
   // Notifications actions
-  viewAllNotifications() {
+  goToNotifications() {
     this.router.navigate(['/notifications']);
-  }
-
-  markNotificationAsRead(notification: Notification) {
-    notification.read = true;
   }
 
   // Quick actions
@@ -319,39 +248,8 @@ export class HomePage implements OnInit {
     this.router.navigate(['/payments']);
   }
 
-  goToNotifications() {
-    this.router.navigate(['/notifications']);
-  }
-
   goToSettings() {
     this.router.navigate(['/settings']);
-  }
-
-  getNotificationIcon(type: string): string {
-    switch (type) {
-      case 'detection': return 'car-sport-outline';
-      case 'payment': return 'checkmark-circle-outline';
-      case 'alert': return 'alert-circle-outline';
-      default: return 'notifications-outline';
-    }
-  }
-
-  formatDate(date: Date): string {
-    const now = new Date();
-    const diff = now.getTime() - date.getTime();
-    const hours = Math.floor(diff / 3600000);
-    const days = Math.floor(diff / 86400000);
-
-    if (hours < 1) {
-      const minutes = Math.floor(diff / 60000);
-      return `Hace ${minutes} min`;
-    } else if (hours < 24) {
-      return `Hace ${hours}h`;
-    } else if (days === 1) {
-      return 'Ayer';
-    } else {
-      return date.toLocaleDateString('es-CO', { day: 'numeric', month: 'short' });
-    }
   }
 
   private async showToast(message: string) {

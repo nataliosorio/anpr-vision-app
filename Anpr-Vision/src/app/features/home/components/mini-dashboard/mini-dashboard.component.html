@@ -1,0 +1,89 @@
+<ion-card class="dashboard-card">
+  <ion-card-header class="dashboard-header">
+    <ion-card-title class="dashboard-title">
+      <ion-icon name="stats-chart-outline"></ion-icon>
+      Estado del Parqueadero
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content class="dashboard-content">
+    <!-- No Parking ID -->
+    <div *ngIf="!parkingId" class="no-parking-container">
+      <div class="no-parking-icon">
+        <ion-icon name="location-outline"></ion-icon>
+      </div>
+      <h3 class="no-parking-title">No hay parqueadero asignado</h3>
+      <p class="no-parking-message">
+        Cuando tengas un parqueadero asignado, aquí verás la información de ocupación en tiempo real.
+      </p>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="parkingId && loading" class="loading-container">
+      <ion-text color="medium">Cargando datos...</ion-text>
+    </div>
+
+    <!-- Error -->
+    <div *ngIf="parkingId && error && !loading" class="error-container">
+      <ion-text color="danger">{{ error }}</ion-text>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div *ngIf="parkingId && !loading && !error && parkingData && occupancyData" class="dashboard-data">
+      <!-- Parking Info -->
+      <div class="parking-info">
+        <div class="parking-name">
+          <ion-icon name="location-outline"></ion-icon>
+          <ion-text>{{ parkingData.name }}</ion-text>
+        </div>
+        <div class="parking-location">
+          <ion-text color="medium">{{ parkingData.location }}</ion-text>
+        </div>
+      </div>
+
+      <!-- Occupancy Visualization -->
+      <div class="occupancy-section">
+        <div class="occupancy-header">
+          <div class="occupancy-stats">
+            <div class="stat-item">
+              <div class="stat-icon">
+                <ion-icon name="car-sport-outline"></ion-icon>
+              </div>
+              <ion-text class="stat-value">{{ occupancyData.occupied }}</ion-text>
+              <ion-text class="stat-label">Ocupados</ion-text>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+              </div>
+              <ion-text class="stat-value">{{ occupancyData.free }}</ion-text>
+              <ion-text class="stat-label">Libres</ion-text>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">
+                <ion-icon name="stats-chart-outline"></ion-icon>
+              </div>
+              <ion-text class="stat-value">{{ occupancyData.total }}</ion-text>
+              <ion-text class="stat-label">Total</ion-text>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <ion-progress-bar
+            [value]="occupancyPercentage"
+            [color]="occupancyColor"
+            class="occupancy-progress">
+          </ion-progress-bar>
+          <div class="progress-label">
+            <ion-text [color]="occupancyColor">{{ occupancyData.percentage.toFixed(1) }}% Ocupado</ion-text>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Indicator -->
+
+    </div>
+  </ion-card-content>
+</ion-card>

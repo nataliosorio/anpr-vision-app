@@ -23,83 +23,184 @@
   <div class="welcome-section">
     <div class="welcome-header">
       <div class="welcome-text">
-        <h1 class="welcome-title">👋 Hola, {{ username }} 👋</h1>
-        <p class="welcome-subtitle">Gestiona tu parqueo fácilmente</p>
+        <h1 class="welcome-title">Buen día</h1>
+        <p class="welcome-subtitle">{{ username }} 👋</p>
       </div>
-
+      <div class="user-avatar-circle" (click)="openProfile()">
+        {{ getFirstLetter(username) }}
+      </div>
     </div>
   </div>
 
-  <!-- 2. Estado actual del vehículo -->
-  <div class="current-status-section">
+  <!-- 2. Mini Dashboard -->
+  <div class="dashboard-section">
+    <app-mini-dashboard [parkingId]="parkingId"></app-mini-dashboard>
+  </div>
+
+  <!-- 3. Vehículos Estacionados -->
+  <div class="vehicles-section">
     <!-- Si hay vehículos parqueados -->
-    <div *ngIf="parkedVehicles.length > 0" class="current-parking-card">
-      <!-- Navegación sutil si hay múltiples vehículos -->
-      <div *ngIf="parkedVehicles.length > 1" class="vehicle-nav-arrows">
-        <ion-button fill="clear" size="small" (click)="prevVehicle()" class="nav-arrow">
-          <ion-icon name="chevron-back-outline"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" size="small" (click)="nextVehicle()" class="nav-arrow">
-          <ion-icon name="chevron-forward-outline"></ion-icon>
-        </ion-button>
+    <div *ngIf="parkedVehicles.length > 0">
+      <div class="section-header">
+        <h2 class="section-title">
+          <ion-icon name="car-sport-outline"></ion-icon>
+          Vehículos Estacionados
+        </h2>
       </div>
 
-      <div class="parking-content">
-        <!-- Indicador de parqueado -->
-        <div class="parking-status">
-          <div class="status-badge">
-            <ion-icon name="car-sport-outline"></ion-icon>
-            <span>Parqueado</span>
-          </div>
-        </div>
-
-        <!-- Placa principal -->
-        <div class="main-plate">
-          <div class="plate-display">
-            <span class="plate-number">{{ currentParkedVehicle?.plate }}</span>
-          </div>
-        </div>
-
-        <!-- Información esencial -->
-        <div class="parking-info">
-          <div class="info-row">
-            <div class="info-item">
-              <ion-icon name="time-outline"></ion-icon>
-              <span>{{ currentParkedVehicle?.timeInside }}</span>
+      <!-- Primer vehículo - Card principal -->
+      <div class="primary-vehicle-card">
+        <div class="vehicle-card-header">
+          <div class="vehicle-image-container">
+            <div class="plate-display-modern">
+              <span class="plate-number">{{ currentParkedVehicle?.plate }}</span>
             </div>
-            <div class="info-item">
-              <ion-icon name="location-outline"></ion-icon>
-              <span>{{ currentParkedVehicle?.slotName }}</span>
+
+            <div class="vehicle-badge">
+              <ion-icon name="checkmark-circle"></ion-icon>
+              Parqueado
             </div>
           </div>
-
-          <div class="vehicle-type-badge">
-            {{ currentParkedVehicle?.typeVehicle }}
-          </div>
         </div>
 
-        <!-- Indicador de múltiples vehículos -->
-        <div *ngIf="parkedVehicles.length > 1" class="vehicle-indicator">
-          <span class="indicator-dot" [class.active]="i === currentVehicleIndex" *ngFor="let vehicle of parkedVehicles; let i = index"></span>
+        <div class="vehicle-card-content">
+
+          <!-- Información en grid -->
+          <div class="info-grid">
+            <div class="info-card">
+              <div class="info-icon">
+                <ion-icon name="time-outline"></ion-icon>
+              </div>
+              <div class="info-text">
+                <span class="info-label">Tiempo</span>
+                <span class="info-value">{{ currentParkedVehicle?.timeInside }}</span>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <ion-icon name="location-outline"></ion-icon>
+              </div>
+              <div class="info-text">
+                <span class="info-label">Ubicación</span>
+                <span class="info-value">{{ currentParkedVehicle?.slotName }}</span>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <ion-icon name="card-outline"></ion-icon>
+              </div>
+              <div class="info-text">
+                <span class="info-label">Tipo</span>
+                <span class="info-value">{{ currentParkedVehicle?.typeVehicle }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón de acción -->
+          <ion-button expand="block" fill="clear" class="view-details-btn" (click)="viewCurrentParkingDetails()">
+            <ion-icon name="eye-outline" slot="start"></ion-icon>
+            Ver Detalles Completos
+          </ion-button>
         </div>
       </div>
 
-      <!-- Botón de acción sutil -->
-      <div class="parking-actions">
-        <ion-button fill="clear" class="details-link" (click)="viewCurrentParkingDetails()">
-          <span>Ver todos mis vehículos</span>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-button>
+      <!-- Lista de vehículos adicionales (si hay más de 1) -->
+      <div *ngIf="parkedVehicles.length > 1" class="additional-vehicles">
+        <div class="section-subheader">
+          <h3 class="subsection-title">Otros Vehículos</h3>
+          <span class="vehicles-count">{{ parkedVehicles.length - 1 }}</span>
+        </div>
+
+        <div class="vehicles-list">
+          <div
+            *ngFor="let vehicle of parkedVehicles; let i = index"
+            [hidden]="i === currentVehicleIndex"
+            class="vehicle-list-item"
+            (click)="selectVehicle(i)"
+          >
+
+            <div class="vehicle-list-info">
+              <div class="vehicle-list-plate">{{ vehicle.plate }}</div>
+              <div class="vehicle-list-details">
+                <span>
+                  <ion-icon name="location-outline"></ion-icon>
+                  {{ vehicle.slotName }}
+                </span>
+                <span class="separator">•</span>
+                <span>
+                  <ion-icon name="time-outline"></ion-icon>
+                  {{ vehicle.timeInside }}
+                </span>
+              </div>
+            </div>
+            <div class="vehicle-list-arrow">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Si NO hay vehículos parqueados -->
-    <div *ngIf="parkedVehicles.length === 0" class="no-parking-card">
-      <div class="no-parking-icon">
+    <div *ngIf="parkedVehicles.length === 0" class="no-vehicles-state">
+      <div class="empty-state-icon">
         <ion-icon name="car-sport-outline"></ion-icon>
       </div>
-      <h3>No tienes vehículos parqueados</h3>
-      <p>Cuando estaciones un vehículo, aparecerá aquí</p>
+      <h3 class="empty-state-title">No hay vehículos estacionados</h3>
+      <p class="empty-state-message">
+        Cuando estaciones un vehículo, aparecerá aquí automáticamente
+      </p>
+      <ion-button
+        expand="block"
+        fill="outline"
+        class="search-parking-btn"
+        (click)="searchNearbyParking()"
+      >
+        <ion-icon name="search-outline" slot="start"></ion-icon>
+        Buscar Parqueaderos Cercanos
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- 3. Acciones Rápidas -->
+  <div class="quick-actions-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        <ion-icon name="flash-outline"></ion-icon>
+        Acciones Rápidas
+      </h2>
+    </div>
+
+    <div class="quick-actions-grid">
+      <div class="quick-action-card" (click)="goToMyVehicle()">
+        <div class="action-icon vehicle">
+          <ion-icon name="car-sport-outline"></ion-icon>
+        </div>
+        <span class="action-label">Mis Vehículos</span>
+      </div>
+
+      <div class="quick-action-card" (click)="goToPayments()">
+        <div class="action-icon payment">
+          <ion-icon name="card-outline"></ion-icon>
+        </div>
+        <span class="action-label">Pagos</span>
+      </div>
+
+      <div class="quick-action-card" (click)="viewFullHistory()">
+        <div class="action-icon history">
+          <ion-icon name="time-outline"></ion-icon>
+        </div>
+        <span class="action-label">Historial</span>
+      </div>
+
+      <div class="quick-action-card" (click)="goToSettings()">
+        <div class="action-icon settings">
+          <ion-icon name="settings-outline"></ion-icon>
+        </div>
+        <span class="action-label">Ajustes</span>
+      </div>
     </div>
   </div>
 

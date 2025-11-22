@@ -62,36 +62,10 @@
   background: rgba(4, 17, 48, 0.95);
   border-radius: 20px;
   padding: 40px 30px;
-  border: 1px solid #30CFD0;
-  box-shadow: 0 0 30px rgba(48, 207, 208, 0.3);
+  border: 1px solid #5CB8B8;
+  box-shadow: 0 0 30px rgba(92, 184, 184, 0.3);
   animation: slideUp 0.6s ease-out;
 
-  // Efecto zigzag (opcional, más sutil que en login)
-  clip-path: polygon(
-    100% 0%,
-    97% 5%,
-    100% 10%,
-    97% 15%,
-    100% 20%,
-    97% 25%,
-    100% 30%,
-    97% 35%,
-    100% 40%,
-    97% 45%,
-    100% 50%,
-    97% 55%,
-    100% 60%,
-    97% 65%,
-    100% 70%,
-    97% 75%,
-    100% 80%,
-    97% 85%,
-    100% 90%,
-    97% 95%,
-    100% 100%,
-    0% 100%,
-    0% 0%
-  );
 }
 
 @keyframes slideUp {
@@ -116,12 +90,12 @@
   width: 70px;
   height: 70px;
   margin: 0 auto 20px;
-  background: linear-gradient(135deg, #00D4FF 0%, #30CFD0 50%, #00FFB3 100%);
+  background: linear-gradient(135deg, #4FC3F7 0%, #5CB8B8 50%, #4DB6AC 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 25px rgba(48, 207, 208, 0.6);
+  box-shadow: 0 0 25px rgba(92, 184, 184, 0.6);
   animation: logoPulse 2s ease-in-out infinite;
 
   ion-icon {
@@ -142,9 +116,9 @@
 .verify-title {
   font-size: 28px;
   font-weight: 700;
-  color: #30CFD0;
+  color: #5CB8B8;
   margin: 0 0 12px;
-  text-shadow: 0 0 15px rgba(48, 207, 208, 0.4);
+  text-shadow: 0 0 15px rgba(92, 184, 184, 0.4);
 }
 
 .verify-subtitle {
@@ -177,10 +151,10 @@
   font-weight: 700;
   color: #ffffff;
   background: rgba(30, 42, 58, 0.8);
-  border: 2px solid rgba(48, 207, 208, 0.4);
+  border: 2px solid rgba(92, 184, 184, 0.4);
   border-radius: 12px;
   outline: none;
-  caret-color: #30CFD0;
+  caret-color: #5CB8B8;
   transition: all 0.3s ease;
 
   &:hover {
@@ -189,8 +163,8 @@
   }
 
   &:focus {
-    border-color: #30CFD0;
-    box-shadow: 0 0 15px rgba(48, 207, 208, 0.5);
+    border-color: #5CB8B8;
+    box-shadow: 0 0 15px rgba(92, 184, 184, 0.5);
     background: rgba(30, 42, 58, 1);
     transform: translateY(-2px);
   }
@@ -203,12 +177,12 @@
 
 // Botón verificar
 .verify-button {
-  --background: linear-gradient(135deg, #0099FF 0%, #30CFD0 50%, #00FFB3 100%);
-  --background-hover: linear-gradient(135deg, #0088EE 0%, #28BFC0 50%, #00EFA3 100%);
-  --background-activated: linear-gradient(135deg, #0077DD 0%, #20AEB0 50%, #00DF93 100%);
+  --background: linear-gradient(135deg, #4FC3F7 0%, #5CB8B8 50%, #4DB6AC 100%);
+  --background-hover: linear-gradient(135deg, #4BB5E5 0%, #5CB8B8 50%, #4DB6AC 100%);
+  --background-activated: linear-gradient(135deg, #42A5D5 0%, #5CB8B8 50%, #4DB6AC 100%);
   --color: #ffffff;
   --border-radius: 12px;
-  --box-shadow: 0 4px 20px rgba(48, 207, 208, 0.5);
+  --box-shadow: 0 4px 20px rgba(92, 184, 184, 0.5);
   --padding-top: 16px;
   --padding-bottom: 16px;
   font-weight: 600;
@@ -224,8 +198,8 @@
 
 // Botón volver
 .back-button {
-  --border-color: rgba(48, 207, 208, 0.5);
-  --color: #30CFD0;
+  --border-color: rgba(92, 184, 184, 0.5);
+  --color: #5CB8B8;
   --border-radius: 12px;
   --border-width: 2px;
   --padding-top: 14px;
@@ -235,8 +209,8 @@
   margin-bottom: 20px;
 
   &:hover {
-    --border-color: #30CFD0;
-    --background: rgba(48, 207, 208, 0.1);
+    --border-color: #5CB8B8;
+    --background: rgba(92, 184, 184, 0.1);
   }
 
   ion-icon {
@@ -249,7 +223,7 @@
   text-align: center;
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 1px solid rgba(48, 207, 208, 0.2);
+  border-top: 1px solid rgba(92, 184, 184, 0.2);
 }
 
 .resend-text {
@@ -261,7 +235,7 @@
 .resend-link {
   background: transparent;
   border: none;
-  color: #30CFD0;
+  color: #5CB8B8;
   font-weight: 600;
   cursor: pointer;
   padding: 0;
@@ -269,7 +243,7 @@
   transition: all 0.3s ease;
 
   &:hover:not(:disabled) {
-    color: #00FFB3;
+    color: #4DB6AC;
     text-decoration: underline;
   }
 
@@ -300,7 +274,7 @@
   .spinner-large {
     width: 50px;
     height: 50px;
-    --color: #30CFD0;
+    --color: #5CB8B8;
     margin-bottom: 20px;
   }
 
