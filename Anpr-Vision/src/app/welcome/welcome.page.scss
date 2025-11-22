@@ -128,10 +128,11 @@
 }
 
 .login-button {
-  --background: linear-gradient(135deg, #0099FF 0%, #00D4FF 50%, #00FFB3 100%);
-  --background-hover: linear-gradient(135deg, #0088EE 0%, #00C4EF 50%, #00EFA3 100%);
-  --background-activated: linear-gradient(135deg, #0077DD 0%, #00B4DF 50%, #00DF93 100%);
-  --color: #ffffff;
+  --background: linear-gradient(135deg, #145f91 0%, #1ea3be 50%, #23d19d  100%);
+  --background-hover: linear-gradient(135deg, #145f91 0%, #1ea3be 50%, #23d19d  100%);
+  --background-activated: linear-gradient(135deg, #145f91 0%, #1ea3be 50%, #23d19d  100%);
+  --color: #000000;
+  --font-weight: 700;
   --border-radius: 12px;
   --box-shadow: 0 4px 20px rgba(0, 153, 255, 0.5);
   font-weight: 600;

@@ -62,36 +62,10 @@
   background: rgba(4, 17, 48, 0.95);
   border-radius: 20px;
   padding: 40px 30px;
-  border: 1px solid #30CFD0;
-  box-shadow: 0 0 30px rgba(48, 207, 208, 0.3);
+  border: 1px solid #5CB8B8;
+  box-shadow: 0 0 30px rgba(92, 184, 184, 0.3);
   animation: slideUp 0.6s ease-out;
 
-  // Efecto zigzag en el borde derecho
-  clip-path: polygon(
-    100% 0%,
-    95% 5%,
-    100% 10%,
-    95% 15%,
-    100% 20%,
-    95% 25%,
-    100% 30%,
-    95% 35%,
-    100% 40%,
-    95% 45%,
-    100% 50%,
-    95% 55%,
-    100% 60%,
-    95% 65%,
-    100% 70%,
-    95% 75%,
-    100% 80%,
-    95% 85%,
-    100% 90%,
-    95% 95%,
-    100% 100%,
-    0% 100%,
-    0% 0%
-  );
 }
 
 @keyframes slideUp {
@@ -108,7 +82,7 @@
 // Logo section
 .logo-section {
   text-align: center;
-  margin-bottom: 35px;
+  // margin-bottom: 5px;
   animation: fadeIn 0.8s ease-out 0.2s both;
 }
 
@@ -117,7 +91,7 @@
   height: 80px;
   object-fit: contain;
   margin-bottom: 15px;
-  filter: drop-shadow(0 0 15px rgba(48, 207, 208, 0.6));
+  filter: drop-shadow(0 0 15px rgba(92, 184, 184, 0.6));
   animation: logoPulse 2s ease-in-out infinite;
 }
 
@@ -133,7 +107,7 @@
 .app-title {
   font-size: 24px;
   font-weight: 700;
-  background: linear-gradient(135deg, #00D4FF 0%, #30CFD0 50%, #00FFB3 100%);
+  background: linear-gradient(135deg, #4FC3F7 0%, #5CB8B8 50%, #4DB6AC 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -147,12 +121,12 @@
 }
 
 .form-title {
-  color: #30CFD0;
+  color: #c4c4c4;
   font-size: 26px;
   font-weight: 600;
   text-align: center;
   margin-bottom: 30px;
-  text-shadow: 0 0 15px rgba(48, 207, 208, 0.4);
+  text-shadow: 0 0 15px rgba(92, 184, 184, 0.4);
 }
 
 // Input wrapper
@@ -162,15 +136,15 @@
   display: flex;
   align-items: center;
   background: transparent;
-  border: 1px solid #30CFD0;
+  border: 1px solid #5CB8B8;
   border-radius: 12px;
   padding: 0;
   transition: all 0.3s ease;
 
   &:hover,
   &:focus-within {
-    box-shadow: 0 0 15px rgba(48, 207, 208, 0.5);
-    border-color: #30CFD0;
+    box-shadow: 0 0 15px rgba(92, 184, 184, 0.5);
+    border-color: #5CB8B8;
   }
 }
 
@@ -180,7 +154,7 @@
   justify-content: center;
   width: 50px;
   height: 54px;
-  background: #30CFD0;
+  background: #5CB8B8;
   border-radius: 12px 0 0 12px;
   color: #041130;
   font-size: 20px;
@@ -212,8 +186,8 @@
 .toggle-password {
   background: transparent;
   border: none;
-  color: #30CFD0;
-  padding: 0 15px;
+  color: #5CB8B8;
+  padding: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -225,7 +199,7 @@
   }
 
   &:hover {
-    color: #00FFB3;
+    color: #4DB6AC;
     transform: scale(1.1);
   }
 
@@ -236,12 +210,12 @@
 
 // Botón de login
 .login-button {
-  --background: linear-gradient(135deg, #0099FF 0%, #30CFD0 50%, #00FFB3 100%);
-  --background-hover: linear-gradient(135deg, #0088EE 0%, #28BFC0 50%, #00EFA3 100%);
-  --background-activated: linear-gradient(135deg, #0077DD 0%, #20AEB0 50%, #00DF93 100%);
-  --color: #ffffff;
+  --background: linear-gradient(135deg, #4FC3F7 0%, #5CB8B8 50%, #4DB6AC 100%);
+  --background-hover: linear-gradient(135deg, #4BB5E5 0%, #5CB8B8 50%, #4DB6AC 100%);
+  --background-activated: linear-gradient(135deg, #42A5D5 0%, #5CB8B8 50%, #4DB6AC 100%);
+  --color: #000000;
   --border-radius: 12px;
-  --box-shadow: 0 4px 20px rgba(48, 207, 208, 0.5);
+  --box-shadow: 0 4px 20px rgba(92, 184, 184, 0.5);
   --padding-top: 16px;
   --padding-bottom: 16px;
   font-weight: 600;
@@ -286,7 +260,7 @@
   .link-button {
     background: transparent;
     border: none;
-    color: #30CFD0;
+    color: #5CB8B8;
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;
@@ -296,7 +270,7 @@
 
     &:hover {
       text-decoration: underline;
-      color: #00FFB3;
+      color: #4DB6AC;
     }
   }
 }
@@ -322,7 +296,7 @@
   .spinner-large {
     width: 50px;
     height: 50px;
-    --color: #30CFD0;
+    --color: #5CB8B8;
     margin-bottom: 20px;
   }
 
@@ -371,10 +345,10 @@
   .alert-error,
   .alert-success {
     --background: rgba(4, 17, 48, 0.98);
-    --border-color: #30CFD0;
+    --border-color: #5CB8B8;
 
     .alert-head {
-      color: #30CFD0;
+      color: #5CB8B8;
     }
 
     .alert-message {
