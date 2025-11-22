@@ -17,6 +17,7 @@ import {
   IonList,
   IonItem,
   IonLabel,
+  IonSpinner,
   AlertController,
   ToastController,
   ActionSheetController,
@@ -53,6 +54,7 @@ import {
 } from 'ionicons/icons';
 import { AuthUserDto, PersonDto, UserService } from './services/user.service';
 import { EditProfileModalComponent } from './edit-profile-modal/edit-profile-modal.component';
+import { TermsModalComponent } from './terms-modal/terms-modal.component';
 import { ApiResponse } from '../authentication/models/ApiResponse';
 
 interface UserProfile {
@@ -96,23 +98,20 @@ interface UserStats {
     IonToggle,
     IonList,
     IonItem,
-    IonLabel
+    IonLabel,
+    IonSpinner
   ]
 })
 export class ProfilePage implements OnInit {
 
   userProfile: UserProfile = {
-    name: 'Karol Martínez',
-    email: 'karol.martinez@example.com',
-    phone: '+57 300 123 4567',
+    name: '',
+    email: '',
+    phone: '',
     avatar: 'assets/default-avatar.png',
-    location: 'Bogotá, Colombia',
-    memberSince: new Date('2024-06-15'),
-    membership: {
-      type: 'Oro',
-      active: true,
-      expiryDate: new Date('2025-12-15')
-    }
+    location: '',
+    memberSince: new Date(),
+    membership: null
   };
 
   userStats: UserStats = {
@@ -126,6 +125,7 @@ export class ProfilePage implements OnInit {
   showPersonDetails: boolean = false;
   avatarColor: string = '#007bff';
   userData: AuthUserDto | null = null;
+  loading: boolean = true;
 
   // Configuraciones
   notificationsEnabled: boolean = true;
@@ -174,10 +174,12 @@ export class ProfilePage implements OnInit {
   }
 
 async ngOnInit() {
+  this.loading = true;
   const userId = Number(localStorage.getItem('userId'));
 
   if (!userId) {
     console.warn("❗ No hay userId en localStorage");
+    this.loading = false;
     return;
   }
 
@@ -206,15 +208,20 @@ async ngOnInit() {
             this.personData = p;
             this.userProfile.phone = p.phone;
             this.userProfile.name = `${p.firstName} ${p.lastName}`;
+            this.loading = false;
           },
           error: err => {
             console.error('❌ Error cargando persona:', err);
+            this.loading = false;
           }
         });
+      } else {
+        this.loading = false;
       }
     },
     error: err => {
       console.error('❌ Error cargando usuario:', err);
+      this.loading = false;
     }
   });
 
@@ -429,8 +436,14 @@ async ngOnInit() {
     this.router.navigate(['/help']);
   }
 
-  viewTerms() {
-    this.router.navigate(['/terms']);
+  async viewTerms() {
+    const modal = await this.modalController.create({
+      component: TermsModalComponent,
+      cssClass: 'terms-modal',
+      backdropDismiss: true
+    });
+
+    return await modal.present();
   }
 
   viewAbout() {
@@ -450,8 +463,12 @@ async ngOnInit() {
           text: 'Cerrar sesión',
           role: 'destructive',
           handler: () => {
-            // Limpiar datos de sesión
-            localStorage.removeItem('userToken');
+            // Limpiar completamente todos los datos de localStorage
+            localStorage.clear();
+
+            // También limpiar sessionStorage si se usa
+            sessionStorage.clear();
+
             this.showToast('Sesión cerrada correctamente');
             this.router.navigate(['/login']);
           }

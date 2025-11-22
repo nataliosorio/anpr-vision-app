@@ -1,0 +1,174 @@
+<ion-header class="modal-header">
+  <ion-toolbar class="modal-toolbar">
+    <ion-title class="modal-title">Términos y Condiciones</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" fill="clear" class="close-btn">
+        <ion-icon name="close-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+  <div class="terms-container">
+
+    <div class="terms-header">
+      <div class="app-logo">
+        <ion-icon name="document-text-outline"></ion-icon>
+      </div>
+      <h1 class="terms-title">TÉRMINOS Y CONDICIONES DE USO</h1>
+      <p class="app-subtitle">Aplicación móvil "ANPR VISION" – Proyecto de grado</p>
+      <p class="last-update">Última actualización: 22/11/2025</p>
+    </div>
+
+    <div class="terms-content">
+
+      <div class="terms-section">
+        <h2 class="section-number">1.</h2>
+        <h3 class="section-title">NATURALEZA DEL PROYECTO</h3>
+        <p class="section-text">
+          La aplicación móvil ANPR VISION hace parte de un proyecto de grado académico, desarrollado por aprendices del Tecnólogo en Análisis y Desarrollo de Software, con fines educativos y de investigación.
+        </p>
+        <p class="section-text">
+          La Aplicación se utiliza en escenarios de prueba o pilotos controlados y no constituye un producto comercial
+          ni un servicio formal de parqueadero.
+        </p>
+        <p class="section-text">
+          Al instalar y usar la Aplicación, usted reconoce que está participando en el uso de una
+          solución académica en desarrollo.
+        </p>
+      </div>
+
+      <div class="terms-section">
+        <h2 class="section-number">2.</h2>
+        <h3 class="section-title">DESCRIPCIÓN DE LA APLICACIÓN</h3>
+        <p class="section-text">
+          La Aplicación está dirigida a propietarios de vehículos / usuarios de un parqueadero y permite, de forma básica:
+        </p>
+        <ul class="section-list">
+          <li>Consultar los vehículos asociados a su cuenta.</li>
+          <li>Visualizar los ingresos y salidas de sus vehículos en el parqueadero.</li>
+          <li>Ver tiempos de permanencia y valores a pagar o históricos de cobros.</li>
+          <li>Consultar información general del parqueadero, como horarios, dirección o datos de contacto, cuando el operador los registre.</li>
+        </ul>
+        <p class="section-text">
+          La Aplicación es principalmente informativa. Los pagos, cobros y procesos administrativos del parqueadero
+          se gestionan por los canales que defina el operador del parqueadero (no necesariamente dentro de la App).
+        </p>
+      </div>
+
+      <div class="terms-section">
+        <h2 class="section-number">3.</h2>
+        <h3 class="section-title">USO DE LA APLICACIÓN</h3>
+        <p class="section-text">
+          Al usar la Aplicación, el Usuario se compromete a:
+        </p>
+        <ul class="section-list">
+          <li>Utilizar la App únicamente para consultar su propia información de vehículos y estacionamiento.</li>
+          <li>No intentar acceder a datos de otros usuarios o manipular la información mostrada.</li>
+          <li>No utilizar la Aplicación para fines ilícitos o contrarios a la buena fe.</li>
+        </ul>
+        <p class="section-text">
+          La Aplicación está pensada para un uso personal, por parte del propietario o usuario autorizado del vehículo.
+        </p>
+      </div>
+
+      <div class="terms-section">
+        <h2 class="section-number">4.</h2>
+        <h3 class="section-title">CUENTA E IDENTIFICACIÓN DEL USUARIO</h3>
+        <p class="section-text">
+          Para poder mostrar solo la información del Usuario, la Aplicación puede requerir algunos datos como:
+        </p>
+        <ul class="section-list">
+          <li>Nombre o alias</li>
+          <li>Correo electrónico o número de teléfono</li>
+          <li>Placa(s) del(os) vehículo(s) asociada(s)</li>
+          <li>Información técnica básica del dispositivo (por ejemplo, modelo y sistema operativo)</li>
+        </ul>
+        <p class="section-text">
+          Estos datos se usan únicamente para:
+        </p>
+        <ul class="section-list">
+          <li>Asociar los vehículos al Usuario.</li>
+          <li>Mostrar los ingresos, salidas y saldos relacionados con esos vehículos dentro del proyecto.</li>
+          <li>Realizar pruebas y mejoras académicas del sistema.</li>
+        </ul>
+        <p class="section-text">
+          Los desarrolladores buscarán manejar la información con cuidado y buenas prácticas básicas, pero se aclara
+          que se trata de un prototipo académico, no de una plataforma comercial certificada.
+        </p>
+      </div>
+
+      <div class="terms-section">
+        <h2 class="section-number">5.</h2>
+        <h3 class="section-title">INFORMACIÓN MOSTRADA Y LIMITACIONES</h3>
+        <p class="section-text">
+          La información que se muestra en la Aplicación (ingresos, salidas, tiempos, valores estimados, etc.) proviene de:
+        </p>
+        <ul class="section-list">
+          <li>Cámaras y sistema de reconocimiento de placas (ANPR).</li>
+          <li>Registros internos del sistema de parqueadero usado para pruebas.</li>
+        </ul>
+        <p class="section-text">
+          El Usuario entiende y acepta que:
+        </p>
+        <ul class="section-list">
+          <li>Pueden existir errores de lectura de placas o registros incompletos.</li>
+          <li>Los valores mostrados pueden ser estimaciones o datos de prueba, según el entorno en que se esté usando la App.</li>
+          <li>La información no debe tomarse como soporte legal o documento oficial, sino como una ayuda visual e informativa dentro del proyecto.</li>
+        </ul>
+        <p class="section-text">
+          En caso de pruebas en un parqueadero real, las condiciones oficiales (tarifas, cobros finales, reclamaciones, etc.)
+          se rigen por las políticas del parqueadero, no por la Aplicación.
+        </p>
+      </div>
+
+      <div class="terms-section">
+        <h2 class="section-number">6.</h2>
+        <h3 class="section-title">RESPONSABILIDAD</h3>
+        <p class="section-text">
+          Debido a la naturaleza académica del proyecto:
+        </p>
+        <ul class="section-list">
+          <li>Los desarrolladores de ANPR VISION no se hacen responsables por daños, pérdidas o inconvenientes derivados del uso o imposibilidad de uso de la Aplicación.</li>
+          <li>La Aplicación no debe utilizarse como único mecanismo de control de un parqueadero real sin supervisión y responsabilidad de una entidad competente.</li>
+          <li>El uso de la Aplicación es bajo responsabilidad del Usuario.</li>
+        </ul>
+      </div>
+
+      <div class="terms-section">
+        <h2 class="section-number">7.</h2>
+        <h3 class="section-title">MODIFICACIONES Y ACTUALIZACIONES</h3>
+        <p class="section-text">
+          Al ser un proyecto de grado en mejora continua, la Aplicación y estos Términos pueden cambiar en cualquier momento,
+          por razones académicas o técnicas.
+        </p>
+        <p class="section-text">
+          Las nuevas versiones pueden modificar funcionalidades, apariencia o forma de mostrar la información, y podrían
+          dejar sin soporte versiones anteriores de la App.
+        </p>
+      </div>
+
+      <div class="terms-section">
+        <h2 class="section-number">8.</h2>
+        <h3 class="section-title">CONTACTO</h3>
+        <p class="section-text">
+          Para dudas, sugerencias o comentarios sobre el proyecto ANPR VISION, el Usuario puede comunicarse con el equipo desarrollador en:
+        </p>
+        <div class="contact-info">
+          <p><strong>Correo:</strong> anprVision@gmail.com</p>
+          <p><strong>Programa / institución:</strong> Tecnólogo en Análisis y Desarrollo de Software - SENA</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="terms-footer">
+      <ion-button expand="block" fill="outline" (click)="dismiss()" class="accept-btn">
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        Entendido
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

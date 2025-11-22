@@ -35,3 +35,21 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Custom Modal Styles */
+.notifications-modal {
+  --backdrop-opacity: 0.6;
+  --backdrop-filter: blur(10px);
+}
+
+/* Filter Popover Styles */
+.filter-popover {
+  --backdrop-opacity: 0.3;
+  --backdrop-filter: blur(8px);
+}
+
+/* Terms Modal Styles */
+.terms-modal {
+  --backdrop-opacity: 0.4;
+  --backdrop-filter: blur(12px);
+}

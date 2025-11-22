@@ -38,4 +38,9 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () => import('./features/profile/profile.page').then( m => m.ProfilePage)
   },
+  {
+    path: 'vehicle-details/:id',
+    loadComponent: () => import('./features/vehicles/vehicle-details/vehicle-details.page').then( m => m.VehicleDetailsPage)
+  },
+
 ];

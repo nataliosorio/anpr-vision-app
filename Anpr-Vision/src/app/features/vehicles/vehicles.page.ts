@@ -11,7 +11,12 @@ import {
   IonButtons,
   IonIcon,
   IonSearchbar,
-  ToastController
+  IonList,
+  IonItem,
+  IonLabel,
+  PopoverController,
+  ToastController,
+  NavController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -29,10 +34,12 @@ import {
   eyeOutline,
   filterOutline,
   carOutline,
-  informationCircleOutline
+  informationCircleOutline,
+  exitOutline
 } from 'ionicons/icons';
 import { VehicleService } from './services/vehicle.service';
 import { VehicleWithStatusDto } from './models/vehicle.model';
+import { FilterPopoverComponent } from './filter-popover/filter-popover.component';
 
 interface Vehicle {
   id: number;
@@ -76,9 +83,19 @@ export class VehiclesPage implements OnInit {
   searchTerm: string = '';
   showFilters: boolean = false;
 
+  // Filtros
+  activeFilter: 'all' | 'parked' | 'not-parked' = 'all';
+  filterOptions = [
+    { key: 'all', label: 'Todos', icon: 'filter-outline' },
+    { key: 'parked', label: 'Parqueados', icon: 'location-outline' },
+    { key: 'not-parked', label: 'Fuera', icon: 'exit-outline' }
+  ] as const;
+
   private router = inject(Router);
   private toastController = inject(ToastController);
   private vehicleService = inject(VehicleService);
+  private popoverController = inject(PopoverController);
+  private navController = inject(NavController);
 
   constructor() {
     addIcons({
@@ -96,7 +113,8 @@ export class VehiclesPage implements OnInit {
       eyeOutline,
       filterOutline,
       carOutline,
-      informationCircleOutline
+      informationCircleOutline,
+      exitOutline
     });
   }
 
@@ -117,7 +135,7 @@ export class VehiclesPage implements OnInit {
       next: (response) => {
         if (response.success && response.data) {
           this.vehicles = response.data.map(dto => this.mapDtoToVehicle(dto));
-          this.filteredVehicles = [...this.vehicles];
+          this.applyFilter();
         } else {
           this.showToast(response.message || 'Error al cargar vehículos', 'danger');
         }
@@ -147,28 +165,65 @@ export class VehiclesPage implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/home']);
+    this.navController.navigateBack('/home');
   }
 
   onSearchChange(event: any) {
     const value = event.detail.value?.toLowerCase() || '';
     this.searchTerm = value;
-
-    if (!value) {
-      this.filteredVehicles = [...this.vehicles];
-      return;
-    }
-
-    this.filteredVehicles = this.vehicles.filter(vehicle =>
-      vehicle.plateNumber.toLowerCase().includes(value) ||
-      vehicle.type.toLowerCase().includes(value) ||
-      vehicle.color.toLowerCase().includes(value) ||
-      vehicle.client.toLowerCase().includes(value)
-    );
+    this.applyFilter();
   }
 
-  toggleFilters() {
-    this.showFilters = !this.showFilters;
+  async toggleFilters(event: Event) {
+    const popover = await this.popoverController.create({
+      component: FilterPopoverComponent,
+      event: event,
+      translucent: true,
+      cssClass: 'filter-popover',
+      componentProps: {
+        activeFilter: this.activeFilter,
+        filterOptions: this.filterOptions
+      }
+    });
+
+    await popover.present();
+
+    const { data } = await popover.onDidDismiss();
+    if (data && data.selectedFilter) {
+      this.activeFilter = data.selectedFilter;
+      this.applyFilter();
+    }
+  }
+
+  private applyFilter() {
+    let filtered = [...this.vehicles];
+
+    // Aplicar filtro de estado
+    switch (this.activeFilter) {
+      case 'parked':
+        filtered = filtered.filter(vehicle => vehicle.currentlyParked);
+        break;
+      case 'not-parked':
+        filtered = filtered.filter(vehicle => !vehicle.currentlyParked);
+        break;
+      case 'all':
+      default:
+        // No filtrar por estado
+        break;
+    }
+
+    // Aplicar filtro de búsqueda
+    if (this.searchTerm) {
+      const searchValue = this.searchTerm.toLowerCase();
+      filtered = filtered.filter(vehicle =>
+        vehicle.plateNumber.toLowerCase().includes(searchValue) ||
+        vehicle.type.toLowerCase().includes(searchValue) ||
+        vehicle.color.toLowerCase().includes(searchValue) ||
+        vehicle.client.toLowerCase().includes(searchValue)
+      );
+    }
+
+    this.filteredVehicles = filtered;
   }
 
   getVehicleIcon(type: string): string {
@@ -256,6 +311,16 @@ get totalParked(): number {
 
 get totalWithMembership(): number {
   return 0; // No tenemos datos de membresía del API
+}
+
+get activeFilterIcon(): string {
+  const filter = this.filterOptions.find(f => f.key === this.activeFilter);
+  return filter?.icon || 'filter-outline';
+}
+
+get activeFilterLabel(): string {
+  const filter = this.filterOptions.find(f => f.key === this.activeFilter);
+  return filter?.label || 'Todos';
 }
 
 

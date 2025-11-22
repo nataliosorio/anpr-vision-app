@@ -710,3 +710,35 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+// Filter Button
+.filter-btn {
+  --background: rgba(48, 207, 208, 0.1);
+  --background-hover: rgba(48, 207, 208, 0.2);
+  --background-activated: rgba(48, 207, 208, 0.15);
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --color: #30CFD0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+
+  ion-icon {
+    font-size: 18px;
+  }
+
+  .filter-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &:hover {
+    --background: rgba(48, 207, 208, 0.15);
+  }
+}

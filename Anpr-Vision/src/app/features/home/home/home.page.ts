@@ -41,6 +41,7 @@ import {
 import { VehicleService } from '../../vehicles/services/vehicle.service';
 import { VehicleWithStatusDto } from '../../vehicles/models/vehicle.model';
 import { MiniDashboardComponent } from '../components/mini-dashboard/mini-dashboard.component';
+import { NotificationsModalComponent } from '../components/notifications-modal/notifications-modal.component';
 
 interface HistoryItem {
   id: number;
@@ -77,7 +78,8 @@ interface Notification {
     IonButtons,
     IonIcon,
     IonBadge,
-    MiniDashboardComponent
+    MiniDashboardComponent,
+    NotificationsModalComponent
   ]
 })
 export class HomePage implements OnInit {
@@ -136,7 +138,7 @@ export class HomePage implements OnInit {
       alertCircleOutline,
       checkmarkCircleOutline,
       eyeOutline,
-      flashOutline
+      flashOutline,
     });
   }
 
@@ -213,7 +215,9 @@ export class HomePage implements OnInit {
 
   // Current parking actions
   viewCurrentParkingDetails() {
-    this.router.navigate(['/vehicles']);
+    if (this.currentParkedVehicle?.id) {
+      this.router.navigate(['/vehicle-details', this.currentParkedVehicle.id]);
+    }
   }
 
   selectVehicle(index: number) {
@@ -235,8 +239,15 @@ export class HomePage implements OnInit {
   }
 
   // Notifications actions
-  goToNotifications() {
-    this.router.navigate(['/notifications']);
+  async goToNotifications() {
+    const modal = await this.modalController.create({
+      component: NotificationsModalComponent,
+      cssClass: 'notifications-modal',
+      backdropDismiss: true,
+      animated: true
+    });
+
+    await modal.present();
   }
 
   // Quick actions

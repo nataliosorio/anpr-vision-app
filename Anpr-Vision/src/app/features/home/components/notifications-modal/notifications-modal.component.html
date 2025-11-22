@@ -1,0 +1,131 @@
+<ion-header class="modal-header">
+  <ion-toolbar class="modal-toolbar">
+    <ion-title class="modal-title">
+
+      <div class="title-text">
+        <span class="title-main">Notificaciones</span>
+        <span *ngIf="unreadCount > 0" class="title-subtitle">{{ unreadCount }} sin leer</span>
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()" fill="clear" class="close-btn">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+  <!-- Filtros de tipo (opcional) -->
+  <div class="notifications-filters">
+    <div class="filter-chips">
+      <div class="filter-chip active" (click)="filterByType('all')">
+        <span>Todas</span>
+        <div class="chip-badge">{{ notifications.length }}</div>
+      </div>
+      <div class="filter-chip" (click)="filterByType('detection')">
+        <ion-icon name="car-sport-outline"></ion-icon>
+        <span>Detecciones</span>
+      </div>
+      <div class="filter-chip" (click)="filterByType('payment')">
+        <ion-icon name="cash-outline"></ion-icon>
+        <span>Pagos</span>
+      </div>
+      <div class="filter-chip" (click)="filterByType('alert')">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <span>Alertas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acción rápida: Marcar todas como leídas -->
+  <div *ngIf="unreadCount > 0" class="quick-actions">
+    <ion-button
+      (click)="markAllAsRead()"
+      expand="block"
+      fill="clear"
+      class="mark-all-btn">
+      <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
+      Marcar todas como leídas
+    </ion-button>
+  </div>
+
+  <!-- Lista de notificaciones -->
+  <div class="notifications-container">
+    <div
+      *ngFor="let notification of notifications; let i = index"
+      class="notification-card"
+      [class.unread]="!notification.read"
+      [class.detection]="notification.type === 'detection'"
+      [class.payment]="notification.type === 'payment'"
+      [class.alert]="notification.type === 'alert'"
+      [class.info]="notification.type === 'info'">
+
+      <!-- Indicador de no leído -->
+      <div *ngIf="!notification.read" class="unread-dot"></div>
+
+      <!-- Icono principal -->
+      <div class="notification-icon-wrapper" [attr.data-type]="notification.type">
+        <div class="icon-pulse" *ngIf="!notification.read"></div>
+        <ion-icon [name]="notification.icon"></ion-icon>
+      </div>
+
+      <!-- Contenido de la notificación -->
+      <div class="notification-body" (click)="markAsRead(notification)">
+        <div class="notification-header-row">
+          <div class="type-badge" [attr.data-type]="notification.type">
+            {{ getTypeLabel(notification.type) }}
+          </div>
+          <div class="timestamp">
+            <ion-icon name="time-outline"></ion-icon>
+            {{ formatTimeAgo(notification.timestamp) }}
+          </div>
+        </div>
+
+        <h3 class="notification-title">{{ notification.title }}</h3>
+        <p class="notification-message">{{ notification.message }}</p>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="notification-actions">
+        <ion-button
+          *ngIf="!notification.read"
+          fill="clear"
+          size="small"
+          class="action-btn mark-read"
+          (click)="markAsRead(notification); $event.stopPropagation()">
+          <ion-icon name="checkmark-circle-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button
+          fill="clear"
+          size="small"
+          class="action-btn delete"
+          (click)="deleteNotification(i); $event.stopPropagation()">
+          <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estado vacío -->
+  <div *ngIf="notifications.length === 0" class="empty-state">
+    <div class="empty-animation">
+      <div class="bell-icon">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </div>
+      <div class="empty-circles">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+      </div>
+    </div>
+    <h3 class="empty-title">Todo está en orden</h3>
+    <p class="empty-message">
+      No tienes notificaciones pendientes.<br/>
+      Te avisaremos cuando haya algo nuevo.
+    </p>
+  </div>
+
+  <!-- Padding bottom -->
+  <div style="height: 20px;"></div>
+</ion-content>

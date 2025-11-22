@@ -1,14 +1,11 @@
 <ion-header [translucent]="true" class="custom-header">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+
     <ion-title>Mis Vehículos</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="toggleFilters()">
+      <ion-button (click)="toggleFilters($event)" class="filter-btn">
         <ion-icon name="filter-outline"></ion-icon>
+        <span class="filter-label" *ngIf="activeFilter !== 'all'">{{ activeFilterLabel }}</span>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -19,8 +16,7 @@
   <!-- Header Section -->
   <div class="page-header">
     <div class="header-content">
-      <h1 class="page-title">Mis Vehículos</h1>
-      <p class="page-subtitle">Estos son los vehículos asociados a tu cuenta ANPR Vision</p>
+
 
       <!-- Estadísticas rápidas -->
       <div class="quick-stats">
@@ -104,7 +100,7 @@
         </div>
       </div>
 
- 
+
 
       <!-- Información adicional -->
       <div class="vehicle-footer">

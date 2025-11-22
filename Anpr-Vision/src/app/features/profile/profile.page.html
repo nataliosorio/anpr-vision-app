@@ -1,16 +1,21 @@
 <ion-header [translucent]="true" class="custom-header">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+
     <ion-title>Mi Perfil</ion-title>
- 
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="profile-content">
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Cargando perfil...</p>
+  </div>
+
+  <!-- Profile Content -->
+  <div *ngIf="!loading">
 
   <!-- Profile Header -->
   <div class="profile-header">
@@ -120,30 +125,7 @@
 
 
 
-  <!-- Preferences -->
-  <div class="settings-section">
-    <h2 class="section-title">
-      <ion-icon name="settings-outline"></ion-icon>
-      Preferencias
-    </h2>
 
-    <ion-list class="settings-list">
-      <ion-item class="setting-item toggle-item">
-        <ion-icon name="moon-outline" slot="start"></ion-icon>
-        <ion-label>
-          <h3>Modo oscuro</h3>
-          <p>Tema oscuro para la aplicación</p>
-        </ion-label>
-        <ion-toggle
-          [(ngModel)]="darkModeEnabled"
-          (ionChange)="onDarkModeToggle($event)"
-          slot="end">
-        </ion-toggle>
-      </ion-item>
-
-
-    </ion-list>
-  </div>
 
   <!-- Support & Info -->
   <div class="settings-section">
@@ -200,5 +182,7 @@
 
   <!-- Padding bottom -->
   <div style="height: 100px;"></div>
+
+  </div> <!-- End of profile content wrapper -->
 
 </ion-content>

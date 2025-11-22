@@ -1,0 +1,175 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Detalles del Vehículo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="vehicle-details-content">
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-text color="medium">Cargando detalles del vehículo...</ion-text>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error && !loading" class="error-container">
+    <ion-text color="danger">{{ error }}</ion-text>
+    <ion-button fill="clear" (click)="goBack()">
+      <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+      Volver
+    </ion-button>
+  </div>
+
+  <!-- Vehicle Details -->
+  <div *ngIf="!loading && !error && vehicle" class="vehicle-details-container">
+
+    <!-- Vehicle Header -->
+    <div class="vehicle-header">
+      <div class="plate-display-large">
+        <span class="plate-number">{{ vehicle.plate }}</span>
+      </div>
+      <div class="vehicle-status">
+        <ion-badge [color]="vehicle.isInside ? 'success' : 'medium'">
+          <ion-icon [name]="vehicle.isInside ? 'checkmark-circle' : 'close-circle'"></ion-icon>
+          {{ vehicle.isInside ? 'Estacionado' : 'Fuera del parqueadero' }}
+        </ion-badge>
+      </div>
+    </div>
+
+    <!-- 1. Datos del Vehículo -->
+    <ion-card class="info-card">
+      <ion-card-header class="card-header">
+        <ion-card-title class="card-title">
+          <ion-icon name="car-sport-outline"></ion-icon>
+          Datos del Vehículo
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content class="card-content">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <div class="info-item">
+                <div class="info-label">
+                  <ion-icon name="car-sport-outline"></ion-icon>
+                  Tipo
+                </div>
+                <div class="info-value">{{ vehicle.typeVehicle }}</div>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div class="info-item">
+                <div class="info-label">
+                  <ion-icon name="color-palette-outline"></ion-icon>
+                  Color
+                </div>
+                <div class="info-value">{{ vehicle.color }}</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <div class="info-item">
+                <div class="info-label">
+                  <ion-icon name="person-outline"></ion-icon>
+                  Propietario
+                </div>
+                <div class="info-value">{{ vehicle.client }}</div>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div class="info-item">
+                <div class="info-label">
+                  <ion-icon name="location-outline"></ion-icon>
+                  Parqueadero
+                </div>
+                <div class="info-value">{{ parkingInfo?.name || 'No asignado' }}</div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- 2. Información del Registro en el Parqueadero -->
+    <ion-card class="info-card" *ngIf="vehicle.isInside">
+      <ion-card-header class="card-header">
+        <ion-card-title class="card-title">
+          <ion-icon name="location-outline"></ion-icon>
+          Registro en Parqueadero
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content class="card-content">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <div class="info-item">
+                <div class="info-label">
+                  <ion-icon name="calendar-outline"></ion-icon>
+                  Fecha de Entrada
+                </div>
+                <div class="info-value">{{ formatDate(vehicle.entryDate) }}</div>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div class="info-item">
+                <div class="info-label">
+                  <ion-icon name="location-outline"></ion-icon>
+                  Espacio
+                </div>
+                <div class="info-value">{{ vehicle.slotName || 'N/A' }}</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <div class="info-item">
+                <div class="info-label">
+                  <ion-icon name="time-outline"></ion-icon>
+                  Tiempo Estacionado
+                </div>
+                <div class="info-value">{{ vehicle.timeInside || 'N/A' }}</div>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div class="info-item">
+                <div class="info-label">
+                  <ion-icon name="cash-outline"></ion-icon>
+                  Estado
+                </div>
+                <div class="info-value">
+                  <ion-badge color="success">Activo</ion-badge>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- 3. Historial (si no está estacionado) -->
+    <ion-card class="info-card" *ngIf="!vehicle.isInside">
+      <ion-card-header class="card-header">
+        <ion-card-title class="card-title">
+          <ion-icon name="time-outline"></ion-icon>
+          Último Registro
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content class="card-content">
+        <div class="no-data-message">
+          <ion-icon name="time-outline"></ion-icon>
+          <ion-text color="medium">No hay registros activos de estacionamiento</ion-text>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+</ion-content>

@@ -1,10 +1,6 @@
 <ion-header [translucent]="true" class="custom-header">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="openMenu()">
-        <ion-icon name="menu-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+
     <ion-title>ANPR VISION</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="goToNotifications()">
@@ -57,7 +53,7 @@
             </div>
 
             <div class="vehicle-badge">
-              <ion-icon name="checkmark-circle"></ion-icon>
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
               Parqueado
             </div>
           </div>
@@ -152,15 +148,7 @@
       <p class="empty-state-message">
         Cuando estaciones un vehículo, aparecerá aquí automáticamente
       </p>
-      <ion-button
-        expand="block"
-        fill="outline"
-        class="search-parking-btn"
-        (click)="searchNearbyParking()"
-      >
-        <ion-icon name="search-outline" slot="start"></ion-icon>
-        Buscar Parqueaderos Cercanos
-      </ion-button>
+
     </div>
   </div>
 
@@ -174,12 +162,7 @@
     </div>
 
     <div class="quick-actions-grid">
-      <div class="quick-action-card" (click)="goToMyVehicle()">
-        <div class="action-icon vehicle">
-          <ion-icon name="car-sport-outline"></ion-icon>
-        </div>
-        <span class="action-label">Mis Vehículos</span>
-      </div>
+
 
       <div class="quick-action-card" (click)="goToPayments()">
         <div class="action-icon payment">
@@ -195,12 +178,7 @@
         <span class="action-label">Historial</span>
       </div>
 
-      <div class="quick-action-card" (click)="goToSettings()">
-        <div class="action-icon settings">
-          <ion-icon name="settings-outline"></ion-icon>
-        </div>
-        <span class="action-label">Ajustes</span>
-      </div>
+
     </div>
   </div>
 

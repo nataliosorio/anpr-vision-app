@@ -1,0 +1,200 @@
+.vehicle-details-content {
+  --background: #0d1b2a;
+}
+
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+    --color: #ffffff;
+    --border-width: 0;
+
+    ion-title {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    ion-button {
+      --color: #30CFD0;
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+.loading-container, .error-container {
+  text-align: center;
+  padding: 40px 20px;
+
+  ion-text {
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.vehicle-details-container {
+  padding: 20px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.vehicle-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.plate-display-large {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 4px solid #000000;
+  border-radius: 12px;
+  padding: 16px 32px;
+  display: inline-block;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  margin-bottom: 16px;
+}
+
+.plate-number {
+  font-size: 32px;
+  font-weight: 900;
+  color: #000000;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 6px;
+}
+
+.vehicle-status {
+  ion-badge {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+
+    ion-icon {
+      font-size: 16px;
+      margin-right: 6px;
+    }
+  }
+}
+
+.info-card {
+  background: linear-gradient(135deg, rgba(27, 38, 59, 0.9) 0%, rgba(13, 27, 42, 0.9) 100%);
+  border: 1px solid rgba(48, 207, 208, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 16px 20px 8px;
+  background: rgba(48, 207, 208, 0.05);
+  border-bottom: 1px solid rgba(48, 207, 208, 0.1);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+
+  ion-icon {
+    font-size: 20px;
+    color: #30CFD0;
+  }
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.info-item {
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .info-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+
+    ion-icon {
+      font-size: 16px;
+      color: #30CFD0;
+    }
+  }
+
+  .info-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    word-break: break-word;
+
+    ion-badge {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+  }
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 20px;
+
+  ion-icon {
+    font-size: 48px;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  ion-text {
+    display: block;
+    font-size: 14px;
+  }
+}
+
+// Responsive
+@media (max-width: 480px) {
+  .vehicle-details-container {
+    padding: 16px;
+  }
+
+  .plate-display-large {
+    padding: 12px 24px;
+  }
+
+  .plate-number {
+    font-size: 24px;
+    letter-spacing: 4px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  .info-item .info-value {
+    font-size: 14px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
