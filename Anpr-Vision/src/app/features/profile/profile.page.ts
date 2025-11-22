@@ -55,6 +55,8 @@ import {
 import { AuthUserDto, PersonDto, UserService } from './services/user.service';
 import { EditProfileModalComponent } from './edit-profile-modal/edit-profile-modal.component';
 import { TermsModalComponent } from './terms-modal/terms-modal.component';
+import { HelpModalComponent } from './help-modal/help-modal.component';
+import { AboutModalComponent } from './about-modal/about-modal.component';
 import { ApiResponse } from '../authentication/models/ApiResponse';
 
 interface UserProfile {
@@ -432,8 +434,14 @@ async ngOnInit() {
     this.saveSettings();
   }
 
-  viewHelp() {
-    this.router.navigate(['/help']);
+  async viewHelp() {
+    const modal = await this.modalController.create({
+      component: HelpModalComponent,
+      cssClass: 'help-modal',
+      backdropDismiss: true
+    });
+
+    return await modal.present();
   }
 
   async viewTerms() {
@@ -446,8 +454,14 @@ async ngOnInit() {
     return await modal.present();
   }
 
-  viewAbout() {
-    this.router.navigate(['/about']);
+  async viewAbout() {
+    const modal = await this.modalController.create({
+      component: AboutModalComponent,
+      cssClass: 'about-modal',
+      backdropDismiss: true
+    });
+
+    return await modal.present();
   }
 
   async logout() {

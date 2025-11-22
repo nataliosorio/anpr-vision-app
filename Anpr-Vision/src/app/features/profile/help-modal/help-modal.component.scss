@@ -1,0 +1,273 @@
+// Modal general
+:host {
+  --height: 90vh;
+  --width: 95vw;
+  --max-width: 600px;
+  --border-radius: 20px;
+  --background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+  --backdrop-filter: blur(20px);
+  --box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  --background: transparent;
+
+  .modal-toolbar {
+    --background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+    --border-width: 0;
+    --min-height: 56px;
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .close-btn {
+      --color: #30CFD0;
+      --padding-start: 8px;
+      --padding-end: 8px;
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+.modal-content {
+  --background: transparent;
+  --padding: 0;
+
+  .help-container {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Header del contenido
+.help-header {
+  text-align: center;
+  padding: 24px 20px 16px;
+  background: linear-gradient(135deg, rgba(48, 207, 208, 0.1) 0%, rgba(0, 153, 255, 0.1) 100%);
+  border-bottom: 1px solid rgba(48, 207, 208, 0.2);
+
+  .help-logo {
+    margin-bottom: 16px;
+
+    ion-icon {
+      font-size: 48px;
+      color: #30CFD0;
+      background: linear-gradient(135deg, rgba(48, 207, 208, 0.2) 0%, rgba(0, 153, 255, 0.2) 100%);
+      border-radius: 50%;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(48, 207, 208, 0.3);
+    }
+  }
+
+  .help-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+
+  .help-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-style: italic;
+  }
+}
+
+// Sección de FAQ
+.faq-section {
+  flex: 1;
+  padding: 20px;
+
+  .faq-list {
+    --background: transparent;
+    padding: 0;
+    margin: 0;
+
+    .faq-item {
+      --background: linear-gradient(135deg, rgba(27, 38, 59, 0.8) 0%, rgba(13, 27, 42, 0.8) 100%);
+      --border-color: rgba(48, 207, 208, 0.2);
+      --border-width: 1px;
+      --border-radius: 12px;
+      --inner-border-width: 0;
+      --padding-start: 0;
+      --padding-end: 0;
+      --padding-top: 0;
+      --padding-bottom: 0;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        --background: linear-gradient(135deg, rgba(27, 38, 59, 0.9) 0%, rgba(13, 27, 42, 0.9) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(48, 207, 208, 0.2);
+      }
+
+      &.expanded {
+        --background: linear-gradient(135deg, rgba(27, 38, 59, 0.95) 0%, rgba(13, 27, 42, 0.95) 100%);
+        box-shadow: 0 4px 16px rgba(48, 207, 208, 0.3);
+      }
+
+      .faq-question {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        width: 100%;
+
+        .question-text {
+          font-size: 16px;
+          font-weight: 600;
+          color: #ffffff;
+          flex: 1;
+          margin-right: 12px;
+          line-height: 1.4;
+        }
+
+        .expand-icon {
+          font-size: 20px;
+          color: #30CFD0;
+          transition: transform 0.3s ease;
+          flex-shrink: 0;
+
+          &.expanded {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .faq-answer {
+        padding: 0 20px 20px;
+        border-top: 1px solid rgba(48, 207, 208, 0.1);
+        margin-top: 8px;
+
+        .answer-text {
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.8);
+          line-height: 1.6;
+          display: block;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// Footer del modal
+.help-footer {
+  padding: 20px;
+  border-top: 1px solid rgba(48, 207, 208, 0.2);
+  background: rgba(13, 27, 42, 0.8);
+
+  .contact-info {
+    text-align: center;
+    margin-bottom: 20px;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0 0 8px;
+    }
+
+    p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0 0 8px;
+    }
+
+    .contact-email {
+      font-size: 14px;
+      color: #30CFD0;
+      font-weight: 500;
+      display: block;
+    }
+  }
+
+  .close-help-btn {
+    --background: linear-gradient(135deg, #30CFD0 0%, #0099FF 100%);
+    --border-radius: 12px;
+    --color: #ffffff;
+    --border-color: rgba(48, 207, 208, 0.3);
+    font-weight: 600;
+    font-size: 15px;
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    box-shadow: 0 4px 16px rgba(48, 207, 208, 0.3);
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 480px) {
+  :host {
+    --width: 98vw;
+    --height: 95vh;
+  }
+
+  .help-header {
+    padding: 20px 16px 12px;
+
+    .help-logo ion-icon {
+      font-size: 40px;
+      padding: 12px;
+    }
+
+    .help-title {
+      font-size: 20px;
+    }
+  }
+
+  .faq-section {
+    padding: 16px;
+
+    .faq-list .faq-item {
+      margin-bottom: 10px;
+
+      .faq-question {
+        padding: 14px 16px;
+
+        .question-text {
+          font-size: 15px;
+        }
+
+        .expand-icon {
+          font-size: 18px;
+        }
+      }
+
+      .faq-answer {
+        padding: 0 16px 16px;
+
+        .answer-text {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .help-footer {
+    padding: 16px;
+
+    .contact-info h3 {
+      font-size: 15px;
+    }
+
+    .close-help-btn {
+      font-size: 14px;
+    }
+  }
+}

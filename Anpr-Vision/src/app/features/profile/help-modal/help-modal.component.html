@@ -1,0 +1,65 @@
+<ion-header class="modal-header">
+  <ion-toolbar class="modal-toolbar">
+    <ion-title class="modal-title">Centro de Ayuda</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" fill="clear" class="close-btn">
+        <ion-icon name="close-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+  <div class="help-container">
+
+    <div class="help-header">
+      <div class="help-logo">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </div>
+      <h1 class="help-title">¿En qué podemos ayudarte?</h1>
+      <p class="help-subtitle">Encuentra respuestas a las preguntas más comunes</p>
+    </div>
+
+    <div class="faq-section">
+      <ion-list class="faq-list">
+
+        <ion-item
+          *ngFor="let item of faqItems"
+          class="faq-item"
+          [class.expanded]="item.isExpanded"
+          button
+          (click)="toggleAnswer(item)">
+
+          <div class="faq-question">
+            <ion-text class="question-text">{{ item.question }}</ion-text>
+            <ion-icon
+              [name]="getExpandedIcon(item)"
+              class="expand-icon"
+              [class.expanded]="item.isExpanded">
+            </ion-icon>
+          </div>
+
+          <div class="faq-answer" *ngIf="item.isExpanded">
+            <ion-text class="answer-text">{{ item.answer }}</ion-text>
+          </div>
+
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+    <div class="help-footer">
+      <div class="contact-info">
+        <h3>¿No encontraste lo que buscas?</h3>
+        <p>Contacta al equipo de soporte</p>
+        <ion-text class="contact-email">anprVision@gmail.com</ion-text>
+      </div>
+
+      <ion-button expand="block" fill="outline" (click)="dismiss()" class="close-help-btn">
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        Cerrar Ayuda
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>
