@@ -1,0 +1,12 @@
+include ':app'
+include ':capacitor-cordova-android-plugins'
+project(':capacitor-cordova-android-plugins').projectDir = new File('./capacitor-cordova-android-plugins/')
+
+apply from: 'capacitor.settings.gradle'
+
+// 🔥 Forzar toolchain globalmente a Java 17
+gradle.beforeProject { project ->
+    project.extensions.extraProperties.set("org.gradle.java.installations.auto-download", false)
+    project.extensions.extraProperties.set("org.gradle.java.installations.paths",
+            ["C:/Program Files/Eclipse Adoptium/jdk-17.0.17.10-hotspot"])
+}
