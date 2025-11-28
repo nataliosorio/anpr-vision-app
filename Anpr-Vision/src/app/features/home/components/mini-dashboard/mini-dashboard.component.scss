@@ -33,6 +33,7 @@
 .dashboard-title {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   font-size: 18px;
   font-weight: 700;
@@ -42,6 +43,36 @@
   ion-icon {
     font-size: 22px;
     color: #30CFD0;
+  }
+}
+
+.parking-indicator {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(48, 207, 208, 0.15);
+  padding: 4px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(48, 207, 208, 0.3);
+}
+
+.navigation-buttons {
+  display: flex;
+  gap: 8px;
+
+  .nav-button {
+    --color: #30CFD0;
+    --background: rgba(48, 207, 208, 0.1);
+    --background-hover: rgba(48, 207, 208, 0.2);
+    --border-radius: 8px;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+
+    ion-icon {
+      font-size: 18px;
+    }
   }
 }
 

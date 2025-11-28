@@ -28,6 +28,14 @@ export class VehicleService {
   }
 
   // =============================
+  // 🔹 Obtener ticket PDF de entrada del vehículo
+  // =============================
+  getVehicleEntryTicket(vehicleId: number): Observable<Blob> {
+    const url = `${this.baseUrl}/tickets/${vehicleId}/pdf`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
+  // =============================
   // ⚙️ Helpers internos
   // =============================
   private validateApiResponse<T>(res: any): ApiResponse<T> {

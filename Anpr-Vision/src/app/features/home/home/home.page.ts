@@ -85,7 +85,8 @@ interface Notification {
 export class HomePage implements OnInit {
 
   username: string = 'Usuario';
-  parkingId: number | null = null;
+  parkingIds: number[] = [];
+  parkingId: number | null = null; // Mantener para compatibilidad
 
   // Vehículos parqueados
   parkedVehicles: VehicleWithStatusDto[] = [];
@@ -159,8 +160,10 @@ export class HomePage implements OnInit {
       try {
         const rolesByParking = JSON.parse(rolesByParkingStr);
         if (Array.isArray(rolesByParking) && rolesByParking.length > 0) {
-          // Tomar el primer parkingId disponible
-          this.parkingId = rolesByParking[0].parkingId;
+          // Capturar todos los parkingIds disponibles
+          this.parkingIds = rolesByParking.map(role => role.parkingId);
+          // Mantener el primer parkingId para compatibilidad
+          this.parkingId = this.parkingIds[0];
           // Guardar en localStorage para acceso rápido
           if (this.parkingId) {
             localStorage.setItem('parkingId', this.parkingId.toString());

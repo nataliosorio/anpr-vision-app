@@ -277,14 +277,14 @@ async ngOnInit() {
           text: 'Tomar foto',
           icon: 'camera-outline',
           handler: () => {
-            this.showToast('Función de cámara no implementada');
+            this.showAlert('Función de cámara no implementada', 'warning');
           }
         },
         {
           text: 'Seleccionar de galería',
           icon: 'images-outline',
           handler: () => {
-            this.showToast('Función de galería no implementada');
+            this.showAlert('Función de galería no implementada', 'warning');
           }
         },
         {
@@ -307,7 +307,7 @@ async ngOnInit() {
 
   async openEditModal() {
     if (!this.userData || !this.personData) {
-      this.showToast('Datos no disponibles');
+      this.showAlert('Datos no disponibles', 'warning');
       return;
     }
 
@@ -336,11 +336,11 @@ async ngOnInit() {
         this.userProfile.name = updatedUser.personName || updatedUser.username;
         this.userProfile.email = updatedUser.email;
         this.avatarColor = this.generateAvatarColor(updatedUser.username);
-        this.showToast('Usuario actualizado');
+        this.showAlert('Usuario actualizado', 'success');
       },
       error: err => {
         console.error('Error actualizando usuario:', err);
-        this.showToast('Error actualizando usuario');
+        this.showAlert('Error actualizando usuario', 'error');
       }
     });
 
@@ -350,11 +350,11 @@ async ngOnInit() {
         this.personData = updatedPerson;
         this.userProfile.name = `${updatedPerson.firstName} ${updatedPerson.lastName}`;
         this.userProfile.phone = updatedPerson.phone;
-        this.showToast('Persona actualizada');
+        this.showAlert('Persona actualizada', 'success');
       },
       error: err => {
         console.error('Error actualizando persona:', err);
-        this.showToast('Error actualizando persona');
+        this.showAlert('Error actualizando persona', 'error');
       }
     });
   }
@@ -404,7 +404,7 @@ async ngOnInit() {
   onNotificationToggle(event: any) {
     this.notificationsEnabled = event.detail.checked;
     this.saveSettings();
-    this.showToast(this.notificationsEnabled ? 'Notificaciones activadas' : 'Notificaciones desactivadas');
+    this.showAlert(this.notificationsEnabled ? 'Notificaciones activadas' : 'Notificaciones desactivadas', 'success');
   }
 
   onPushToggle(event: any) {
@@ -425,7 +425,7 @@ async ngOnInit() {
   onDarkModeToggle(event: any) {
     this.darkModeEnabled = event.detail.checked;
     this.saveSettings();
-    this.showToast(this.darkModeEnabled ? 'Modo oscuro activado' : 'Modo claro activado');
+    this.showAlert(this.darkModeEnabled ? 'Modo oscuro activado' : 'Modo claro activado', 'success');
     // Aquí aplicarías el tema oscuro/claro
   }
 
@@ -483,7 +483,7 @@ async ngOnInit() {
             // También limpiar sessionStorage si se usa
             sessionStorage.clear();
 
-            this.showToast('Sesión cerrada correctamente');
+            this.showAlert('Sesión cerrada correctamente', 'success');
             this.router.navigate(['/login']);
           }
         }
@@ -524,11 +524,11 @@ async ngOnInit() {
                   text: 'Confirmar',
                   handler: (data) => {
                     if (data.confirmation === 'ELIMINAR') {
-                      this.showToast('Cuenta eliminada correctamente');
+                      this.showAlert('Cuenta eliminada correctamente', 'success');
                       this.router.navigate(['/login']);
                       return true;
                     } else {
-                      this.showToast('Texto de confirmación incorrecto');
+                      this.showAlert('Texto de confirmación incorrecto', 'error');
                       return false;
                     }
                   }
@@ -561,13 +561,17 @@ async ngOnInit() {
     }).format(amount);
   }
 
-  private async showToast(message: string) {
-    const toast = await this.toastController.create({
+  /**
+   * Mostrar alerta
+   */
+  private async showAlert(message: string, type: 'warning' | 'error' | 'success') {
+    const alert = await this.alertController.create({
+      header: type === 'success' ? '¡Éxito!' : type === 'error' ? 'Error' : 'Advertencia',
       message: message,
-      duration: 2000,
-      position: 'bottom',
-      color: 'primary'
+      buttons: ['OK'],
+      cssClass: `alert-${type}`
     });
-    await toast.present();
+
+    await alert.present();
   }
 }

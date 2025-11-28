@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonProgressBar, IonIcon, IonText } from '@ionic/angular/standalone';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonProgressBar, IonIcon, IonText, IonButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { carSportOutline, locationOutline, statsChartOutline, checkmarkCircleOutline } from 'ionicons/icons';
+import { carSportOutline, locationOutline, statsChartOutline, checkmarkCircleOutline, chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
 import { DashboardService, OccupancyData, ParkingData } from '../../services/dashboard.service';
 
 @Component({
@@ -10,16 +10,35 @@ import { DashboardService, OccupancyData, ParkingData } from '../../services/das
   templateUrl: './mini-dashboard.component.html',
   styleUrls: ['./mini-dashboard.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonProgressBar, IonIcon, IonText]
+  imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonProgressBar, IonIcon, IonText, IonButton]
 })
 export class MiniDashboardComponent implements OnInit {
 
-  @Input() parkingId: number | null = null;
+  @Input() parkingIds: number[] = [];
+  @Input() parkingId: number | null = null; // Mantener para compatibilidad
 
   occupancyData: OccupancyData | null = null;
   parkingData: ParkingData | null = null;
   loading = true;
   error: string | null = null;
+
+  // Estado del carrusel
+  currentParkingIndex: number = 0;
+  get currentParkingId(): number | null {
+    if (this.parkingIds.length > 0) {
+      return this.parkingIds[this.currentParkingIndex];
+    }
+    return this.parkingId;
+  }
+
+  get hasMultipleParkings(): boolean {
+    return this.parkingIds.length > 1;
+  }
+
+  get parkingIndicator(): string {
+    if (this.parkingIds.length <= 1) return '';
+    return `${this.currentParkingIndex + 1}/${this.parkingIds.length}`;
+  }
 
   private dashboardService = inject(DashboardService);
 
@@ -28,7 +47,9 @@ export class MiniDashboardComponent implements OnInit {
       carSportOutline,
       locationOutline,
       statsChartOutline,
-      checkmarkCircleOutline
+      checkmarkCircleOutline,
+      chevronBackOutline,
+      chevronForwardOutline
     });
   }
 
@@ -37,7 +58,9 @@ export class MiniDashboardComponent implements OnInit {
   }
 
   private loadDashboardData() {
-    if (!this.parkingId) {
+    const targetParkingId = this.currentParkingId;
+
+    if (!targetParkingId) {
       this.loading = false;
       return;
     }
@@ -46,7 +69,7 @@ export class MiniDashboardComponent implements OnInit {
     this.error = null;
 
     // Cargar info del parqueadero
-    this.dashboardService.getParkingInfo(this.parkingId).subscribe({
+    this.dashboardService.getParkingInfo(targetParkingId).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.parkingData = response.data;
@@ -60,7 +83,7 @@ export class MiniDashboardComponent implements OnInit {
     });
 
     // Cargar ocupación
-    this.dashboardService.getGlobalOccupancy(this.parkingId).subscribe({
+    this.dashboardService.getGlobalOccupancy(targetParkingId).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.occupancyData = response.data;
@@ -73,6 +96,23 @@ export class MiniDashboardComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  // Navegación del carrusel
+  nextParking() {
+    if (this.parkingIds.length > 1) {
+      this.currentParkingIndex = (this.currentParkingIndex + 1) % this.parkingIds.length;
+      this.loadDashboardData();
+    }
+  }
+
+  previousParking() {
+    if (this.parkingIds.length > 1) {
+      this.currentParkingIndex = this.currentParkingIndex === 0
+        ? this.parkingIds.length - 1
+        : this.currentParkingIndex - 1;
+      this.loadDashboardData();
+    }
   }
 
   get occupancyPercentage(): number {

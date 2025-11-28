@@ -31,11 +31,13 @@ import {
   personOutline,
   cashOutline,
   checkmarkCircleOutline,
-  closeCircleOutline
+  closeCircleOutline,
+  receiptOutline
 } from 'ionicons/icons';
 import { VehicleService } from '../services/vehicle.service';
 import { VehicleWithStatusDto } from '../models/vehicle.model';
 import { DashboardService } from '../../home/services/dashboard.service';
+import { LoadingController, ToastController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -75,6 +77,8 @@ export class VehicleDetailsPage implements OnInit {
   private router = inject(Router);
   private vehicleService = inject(VehicleService);
   private dashboardService = inject(DashboardService);
+  private loadingController = inject(LoadingController);
+  private toastController = inject(ToastController);
 
   constructor() {
     addIcons({
@@ -87,7 +91,8 @@ export class VehicleDetailsPage implements OnInit {
       personOutline,
       cashOutline,
       checkmarkCircleOutline,
-      closeCircleOutline
+      closeCircleOutline,
+      receiptOutline
     });
   }
 
@@ -153,6 +158,35 @@ export class VehicleDetailsPage implements OnInit {
 
   goBack() {
     this.router.navigate(['/tabs/tab1']);
+  }
+
+  async viewTicket(vehicle: VehicleWithStatusDto) {
+    if (!vehicle?.id) return;
+
+    const loading = await this.loadingController.create({
+      message: 'Obteniendo ticket...',
+      spinner: 'crescent'
+    });
+
+    await loading.present();
+
+    this.vehicleService.getVehicleEntryTicket(vehicle.id).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+        loading.dismiss();
+      },
+      error: async (err: Error) => {
+        loading.dismiss();
+        const toast = await this.toastController.create({
+          message: err.message || 'No se pudo obtener el ticket',
+          duration: 3000,
+          position: 'bottom',
+          color: 'danger'
+        });
+        await toast.present();
+      }
+    });
   }
 
   formatDate(date: Date | string | null): string {

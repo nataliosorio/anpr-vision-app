@@ -3,7 +3,19 @@
     <ion-card-title class="dashboard-title">
       <ion-icon name="stats-chart-outline"></ion-icon>
       Estado del Parqueadero
+      <!-- Indicador de parqueadero cuando hay múltiples -->
+      <span *ngIf="hasMultipleParkings" class="parking-indicator">{{ parkingIndicator }}</span>
     </ion-card-title>
+
+    <!-- Flechas de navegación cuando hay múltiples parqueaderos -->
+    <div *ngIf="hasMultipleParkings" class="navigation-buttons">
+      <ion-button fill="clear" size="small" (click)="previousParking()" class="nav-button">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" size="small" (click)="nextParking()" class="nav-button">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
   </ion-card-header>
 
   <ion-card-content class="dashboard-content">

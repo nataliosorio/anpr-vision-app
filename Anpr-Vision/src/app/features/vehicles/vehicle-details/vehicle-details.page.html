@@ -150,6 +150,18 @@
             </ion-col>
           </ion-row>
         </ion-grid>
+
+        <!-- Botón del ticket -->
+        <div class="ticket-actions">
+          <ion-button
+            fill="outline"
+            size="default"
+            (click)="viewTicket(vehicle)"
+            class="ticket-btn">
+            <ion-icon name="receipt-outline" slot="start"></ion-icon>
+            Ver Ticket de Entrada
+          </ion-button>
+        </div>
       </ion-card-content>
     </ion-card>
 

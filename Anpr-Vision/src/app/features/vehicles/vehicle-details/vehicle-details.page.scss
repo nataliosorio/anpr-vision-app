@@ -147,6 +147,26 @@ ion-header {
   }
 }
 
+.ticket-actions {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(48, 207, 208, 0.1);
+
+  .ticket-btn {
+    width: 100%;
+    --border-radius: 12px;
+    --border-color: rgba(48, 207, 208, 0.3);
+    --color: #30CFD0;
+    --background: rgba(48, 207, 208, 0.05);
+    --background-hover: rgba(48, 207, 208, 0.1);
+    font-weight: 600;
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
 .no-data-message {
   text-align: center;
   padding: 20px;

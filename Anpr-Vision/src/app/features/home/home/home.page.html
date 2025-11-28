@@ -2,14 +2,14 @@
   <ion-toolbar>
 
     <ion-title>ANPR VISION</ion-title>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-button (click)="goToNotifications()">
         <ion-icon name="notifications-outline"></ion-icon>
         <ion-badge *ngIf="unreadNotifications > 0" class="notification-badge">
           {{ unreadNotifications }}
         </ion-badge>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -30,7 +30,7 @@
 
   <!-- 2. Mini Dashboard -->
   <div class="dashboard-section">
-    <app-mini-dashboard [parkingId]="parkingId"></app-mini-dashboard>
+    <app-mini-dashboard [parkingIds]="parkingIds" [parkingId]="parkingId"></app-mini-dashboard>
   </div>
 
   <!-- 3. Vehículos Estacionados -->
@@ -153,7 +153,7 @@
   </div>
 
   <!-- 3. Acciones Rápidas -->
-  <div class="quick-actions-section">
+  <!-- <div class="quick-actions-section">
     <div class="section-header">
       <h2 class="section-title">
         <ion-icon name="flash-outline"></ion-icon>
@@ -180,7 +180,7 @@
 
 
     </div>
-  </div>
+  </div> -->
 
   <!-- Padding bottom para navegación -->
   <div style="height: 100px;"></div>
