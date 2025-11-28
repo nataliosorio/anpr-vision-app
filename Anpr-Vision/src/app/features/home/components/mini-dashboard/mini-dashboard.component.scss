@@ -1,6 +1,6 @@
 .dashboard-card {
   background: linear-gradient(135deg, rgba(27, 38, 59, 0.9) 0%, rgba(13, 27, 42, 0.9) 100%);
-  border: 1px solid rgba(48, 207, 208, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.15);
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   margin: 16px 0;
@@ -17,7 +17,7 @@
     bottom: 0;
     background: radial-gradient(
       ellipse at 50% 20%,
-      rgba(48, 207, 208, 0.1) 0%,
+      rgba(16, 185, 129, 0.08) 0%,
       transparent 70%
     );
     pointer-events: none;
@@ -42,7 +42,7 @@
 
   ion-icon {
     font-size: 22px;
-    color: #30CFD0;
+    color: #10b981;
   }
 }
 
@@ -50,10 +50,10 @@
   font-size: 14px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.8);
-  background: rgba(48, 207, 208, 0.15);
+  background: rgba(16, 185, 129, 0.12);
   padding: 4px 8px;
   border-radius: 12px;
-  border: 1px solid rgba(48, 207, 208, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .navigation-buttons {
@@ -61,9 +61,9 @@
   gap: 8px;
 
   .nav-button {
-    --color: #30CFD0;
-    --background: rgba(48, 207, 208, 0.1);
-    --background-hover: rgba(48, 207, 208, 0.2);
+    --color: #10b981;
+    --background: rgba(16, 185, 129, 0.08);
+    --background-hover: rgba(16, 185, 129, 0.15);
     --border-radius: 8px;
     --padding-start: 8px;
     --padding-end: 8px;
@@ -91,7 +91,7 @@
     height: 80px;
     margin: 0 auto 20px;
     border-radius: 50%;
-    background: rgba(48, 207, 208, 0.15);
+    background: rgba(16, 185, 129, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,8 +126,8 @@
 .parking-info {
   margin-bottom: 20px;
   padding: 16px;
-  background: rgba(48, 207, 208, 0.08);
-  border: 1px solid rgba(48, 207, 208, 0.15);
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.12);
   border-radius: 12px;
 
   .parking-name {
@@ -141,7 +141,7 @@
 
     ion-icon {
       font-size: 18px;
-      color: #30CFD0;
+      color: #10b981;
     }
   }
 
@@ -163,8 +163,8 @@
 }
 
 .stat-item {
-  background: rgba(48, 207, 208, 0.08);
-  border: 1px solid rgba(48, 207, 208, 0.15);
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.12);
   border-radius: 12px;
   padding: 16px 12px;
   text-align: center;
@@ -177,7 +177,7 @@
     width: 36px;
     height: 36px;
     border-radius: 10px;
-    background: linear-gradient(135deg, #30CFD0 0%, #00D4FF 100%);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -206,8 +206,8 @@
 .progress-container {
   margin-bottom: 20px;
   padding: 16px;
-  background: rgba(48, 207, 208, 0.05);
-  border: 1px solid rgba(48, 207, 208, 0.1);
+  background: rgba(16, 185, 129, 0.04);
+  border: 1px solid rgba(16, 185, 129, 0.08);
   border-radius: 12px;
 
   .occupancy-progress {
@@ -227,8 +227,8 @@
 
 .occupancy-indicator {
   padding: 16px;
-  background: rgba(48, 207, 208, 0.05);
-  border: 1px solid rgba(48, 207, 208, 0.1);
+  background: rgba(16, 185, 129, 0.04);
+  border: 1px solid rgba(16, 185, 129, 0.08);
   border-radius: 12px;
 
   .indicator-circles {
